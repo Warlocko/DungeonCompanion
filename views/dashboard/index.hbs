@@ -1,0 +1,10 @@
+<main role="main" class="container">
+  <div class="starter-template">
+    <h1>Hello {{ user.name }}!</h1>
+    <a href="/campaigns" class="btn btn-default" style="background-color:rgb(16, 173, 173); color: white;">Campaña</a>
+    {{#if isAdmin}}
+      <a href="/newCampaign" class="btn btn-default" style="background-color:rgb(62, 248, 55); color: white;">Crear Campaña</a>
+    {{/if}}
+    <a href="/profile/{{user.id}}" class="btn btn-default" style="background-color:#46b8da; color: white;">Perfil</a>
+  </div>
+</main>

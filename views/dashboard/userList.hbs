@@ -1,0 +1,20 @@
+<main role="main" class="container">
+  <div class="starter-template">
+    <table style="font-family: Poppins; width:100%;" class="container">
+        <tr style="background-color:#B9BBB6; color: white;";>
+        <th>#</th>
+        <th>Name</th>
+        <th>Mail</th>
+    </tr>
+      {{#each userList}}
+        <tr>
+            <th>{{id}}</th>
+            <th> {{name}}</th>
+            <th> {{email}} </th>
+        </tr>
+      {{/each}}
+      </table>>
+  </div>
+  <hr>
+  <a href="dashboard" class="btn btn-default" style="background-color:#46b8da; color: white;">Regresar</a>
+</main>
