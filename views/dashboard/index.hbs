@@ -1,10 +1,38 @@
 <main role="main" class="container">
   <div class="starter-template">
-    <h1>Hello {{ user.name }}!</h1>
-    <a href="/campaigns" class="btn btn-default" style="background-color:rgb(16, 173, 173); color: white;">Campaña</a>
+    <h1>¡Bienvenido a la aventura {{ user.name }}!</h1>
+    <br>
     {{#if isAdmin}}
-      <a href="/newCampaign" class="btn btn-default" style="background-color:rgb(62, 248, 55); color: white;">Crear Campaña</a>
+      <div class="card mb-3 module">
+      <img src="https://pbs.twimg.com/media/Dh6eMG6W0AEZ4Jl.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title text-module"><b>Crear Campaña</b></h5>
+        <p class="card-text text-module">¿Tienes una gran historia que contar? ¿Tienes una aventura con grandes villanos y lugares fantásticos que puedes contar? Comienza una nueva aventura...</p>
+        <p class="card-text"><small class="text-muted text-module">Escoge los módulos y prepara una nueva aventura</small></p>
+        <a href="/newCampaign" class="card-link text-module"><i>Comenzar creando la campaña...</i></a>
+      </div>
+      </div>
     {{/if}}
-    <a href="/profile/{{user.id}}" class="btn btn-default" style="background-color:#46b8da; color: white;">Perfil</a>
+    
+    <div class="card mb-3 module">
+      <img src="https://cache.escapistmagazine.com/2019/09/inn_of_heroes_by_atomiiii-dc2oxlu-800x400.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title text-module"><b>Información de la Campaña</b></h5>
+        <p class="card-text text-module">Los males del Multiverso amenazan la tierra, el Gremio organiza grupos de aventureros listos para enfrentarlo a cambio de sustansiosas recompensas ¡Tú y tu pintorezco grupo pueden ser estos héroes y salvar a todos!</p>
+        <p class="card-text"><small class="text-muted text-module">Módulo West Marches</small></p>
+        <a href="/campaigns" class="card-link text-module"><i>Entrar a la campaña...</i></a>
+      </div>
+    </div>
+
+    <div class="card mb-3 module">
+      <img src="https://geekandsundry.com/wp-content/uploads/2016/09/DD-climax-1024x544.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title text-module"><b>Personaje</b></h5>
+        <p class="card-text text-module">De la fuerza de la espada a el poder de la magia innata, pasando por la habiliad del arco y los artificios, una gran variedad de personas coloridad caminan por el mundo, pero... ¿Cuál eres tú?</p>
+        <p class="card-text"><small class="text-muted text-module">Consulta tus personajes</small></p>
+        <a href="/profile/{{user.id}}" class="card-link text-module"><i>Consultar Personajes</i></a>
+    </div>
+    </div>
+
   </div>
 </main>
