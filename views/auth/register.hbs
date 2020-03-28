@@ -1,52 +1,51 @@
-
-
-<form class="form-signin" method="POST" action="/register">
-  <div class="text-center mb-4">
-    <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-    <p>
-      Already have an account? <a href="/login">Login</a>
-    </p>
-  </div>
-
-  {{#if errors.length}}
-    <div class="alert alert-danger">
-      Oops! the following errors were found:
-      <ul>
-        {{#each errors}}
-          <li>[{{param}}]: {{msg}}</li>
-        {{/each}}
-      </ul>
+<div class="auth-container">
+  <form class="form-signin" method="POST" action="/register">
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Dungeon Companion</b></h1>
+      <p>
+        ¿Formas ya parte de la aventura? <a href="/login">Ingresar</a>
+      </p>
     </div>
-  {{/if}}
 
-  <div class="form-label-group">
-    <input type="text" name="name" id="inputName" class="form-control" placeholder="Name">
-    <label for="inputName">Name</label>
-  </div>
+    {{#if errors.length}}
+      <div class="alert alert-danger">
+        ¡Te equivocaste en un hechizo! Revisa tus datos:
+        <ul>
+          {{#each errors}}
+            <li>[{{param}}]: {{msg}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
 
-  <div class="form-label-group">
-    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address">
-    <label for="inputEmail">Email address</label>
-  </div>
+    <div class="form-label-group">
+      <input type="text" name="name" id="inputName" class="form-control" placeholder="Name">
+      <label for="inputName">Usuario</label>
+    </div>
 
-  <div class="form-label-group">
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
-    <label for="inputPassword">Password</label>
-  </div>
+    <div class="form-label-group">
+      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address">
+      <label for="inputEmail">Correo Electrónico</label>
+    </div>
 
-  <div class="form-label-group">
-    <input type="password" name="confirm_password" id="inputConfirmPassword" class="form-control" placeholder="Password">
-    <label for="inputConfirmPassword">Confirm password</label>
-  </div>
+    <div class="form-label-group">
+      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
+      <label for="inputPassword">Contraseña</label>
+    </div>
 
-  <div class="form-label-group">
-    <select id="role" name="role" class="form-control">
-      <option value="DM">Dungeon Master</option>
-      <option value="PC">Player</option>
-    </select>
-    
-  </div>
+    <div class="form-label-group">
+      <input type="password" name="confirm_password" id="inputConfirmPassword" class="form-control" placeholder="Password">
+      <label for="inputConfirmPassword">Confirmar Contraseña</label>
+    </div>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-  <p class="mt-5 mb-3 text-muted text-center">© {{year}}</p>
-</form>
+    <div class="form-label-group">
+      <select id="role" name="role" class="form-control">
+        <option disabled selected value="PC">Clase de jugador</option>
+        <option value="DM">Director de Juego</option>
+        <option value="PC">Aventurero</option>
+      </select>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block auth-btn" type="submit">Registarse</button>
+  </form>
+</div>

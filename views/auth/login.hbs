@@ -1,8 +1,10 @@
-<form class="form-signin" method="POST" action="/login">
+<div class="auth-container">
+  <form class="form-signin" method="POST" action="/login">
   <div class="text-center mb-4">
-    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Dungeon Companion</b></h1>
+    <br>
     <p>
-      You don't have an account? <a href="/register">Register</a>
+      ¿Eres nuevo en la aventura? ¡Crea tu cuenta! <a href="/register">Registrar</a>
     </p>
   </div>
 
@@ -13,15 +15,15 @@
   {{/if}}
 
   <div class="form-label-group">
-    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address">
-    <label for="inputEmail">Email address</label>
+    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email">
+    <label for="inputEmail">Correo Electrónico</label>
   </div>
 
   <div class="form-label-group">
-    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password">
-    <label for="inputPassword">Password</label>
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="password">
+    <label for="inputPassword">Contraseña</label>
   </div>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-  <p class="mt-5 mb-3 text-muted text-center">© {{year}}</p>
+  <button class="btn btn-lg btn-primary btn-block auth-btn" type="submit">Entrar</button>
 </form>
+</div>
