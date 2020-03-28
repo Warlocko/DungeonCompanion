@@ -13,3 +13,10 @@ exports.userList = (req, res) => {
     }
   )
 }
+
+exports.map = (req,res) =>{
+	//Do a DB request for a map based on id
+
+	res.render('dashboard/map')
+
+}
