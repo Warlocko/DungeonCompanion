@@ -1,0 +1,33 @@
+<div class="campaign-container">
+  <form class="form-signin" method="POST" action="/app/campaign/{{cmpid}}/event/{{evid}}/send">
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Un Aventurero Responde</b></h1>
+    </div>
+
+    <div class="form-label-group">
+      <select id="role" name="role" class="form-control">
+        <option disabled selected value="0">El Aventurero</option>
+        <option value="{{id}}">Example Adventurer</option>
+        {{#each adv}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-label-group">
+      <input type="text" name="description" id="inputDesc" row = "5" class="form-control" placeholder="Description">
+      <label for="inputDesc">Describe que realiza el aventurero</label>
+    </div>
+    {{item.item}}
+  <div class="form-label-group">
+      <select id="role" name="role" class="form-control">
+        <option disabled selected value="0">Equipado con</option>
+        <option value="{{id}}">Example Item</option>
+        {{#each item}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block camp-btn" type="submit">Crear</button>
+  </form>
+</div>

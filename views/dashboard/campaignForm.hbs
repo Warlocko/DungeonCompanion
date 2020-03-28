@@ -1,0 +1,29 @@
+<div class="campaign-container">
+  <form class="form-signin" method="POST" action="/create-campaign">
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Dungeon Companion</b></h1>
+    </div>
+
+    <div class="form-label-group">
+      <input type="text" name="name" id="inputDesc" class="form-control" placeholder="Name">
+      <label for="inputName">Nombre de Campaña</label>
+    </div>
+
+    <div class="form-label-group">
+      <input type="text" name="description" id="inputDesc" row = "5" class="form-control" placeholder="Description">
+      <label for="inputDesc">Descripcion de Campaña</label>
+    </div>
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputCmpMap">Upload Map</span>
+      </div>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputMap">
+        <label class="custom-file-label" for="inputMap">Choose file</label>
+      </div>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block camp-btn" type="submit">Crear</button>
+  </form>
+</div>

@@ -1,0 +1,29 @@
+<div class="campaign-container">
+  <form class="form-signin" method="POST" action="/app/dashboard/crevent">
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Nuevos Sucesos Ocurren en </b></h1>
+    </div>
+
+    <div class="form-label-group">
+      <input type="text" name="name" id="inputName" class="form-control" placeholder="Name">
+      <label for="inputName">Titulo del Evento</label>
+    </div>
+
+    <div class="form-label-group">
+      <input type="text" name="description" id="inputDesc" row = "5" class="form-control" placeholder="Description">
+      <label for="inputDesc">Descripcion del Evento</label>
+    </div>
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputImg">Sube Imagen de Evento</span>
+      </div>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputImg">
+        <label class="custom-file-label" for="inputImg">Choose file</label>
+      </div>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block camp-btn" type="submit">Crear</button>
+  </form>
+</div>
