@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Perfil de {{user.name}}</h1>
+            <h3>Identificador: {{user.id}}</h3>
+            <h5>Correo: {{user.email}}</h5>
+            <h5>Aventureros:</h5>
+             {{#each adv.adv}}
+                <h6>{{name}}</h6>
+             {{/each}}
+             <a href="/app/dashboard" class="btn btn-info">Regresar</a>
+        </div>
+    </div>
+</div>

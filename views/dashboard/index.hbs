@@ -1,6 +1,6 @@
 <main role="main" class="container">
   <div class="starter-template">
-    <h1>¡Bienvenido a la aventura {{ user.name }}!</h1>
+    <h1>¡Bienvenido a la aventura, {{ user.name }}!</h1>
     <br>
     {{#if isAdmin}}
       <div class="card mb-3 module">
@@ -14,6 +14,19 @@
       </div>
     {{/if}}
     
+  {{#each campaigns}}
+    <div class="card mb-3 module">
+      <img src="https://cache.escapistmagazine.com/2019/09/inn_of_heroes_by_atomiiii-dc2oxlu-800x400.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title text-module"><b>{{name}}</b></h5>
+        <p class="card-text text-module">{{description}}</p>
+        <p class="card-text"><small class="text-muted text-module">Módulo West Marches</small></p>
+        <a href="/app/campaign/1" class="card-link text-module"><i>Entrar a la campaña...</i></a>
+      </div>
+    </div>
+  {{/each}}
+    
+
     <div class="card mb-3 module">
       <img src="https://cache.escapistmagazine.com/2019/09/inn_of_heroes_by_atomiiii-dc2oxlu-800x400.jpg" class="card-img-top" alt="...">
       <div class="card-body">
@@ -30,7 +43,7 @@
         <h5 class="card-title text-module"><b>Personaje</b></h5>
         <p class="card-text text-module">De la fuerza de la espada a el poder de la magia innata, pasando por la habiliad del arco y los artificios, una gran variedad de personas coloridad caminan por el mundo, pero... ¿Cuál eres tú?</p>
         <p class="card-text"><small class="text-muted text-module">Consulta tus personajes</small></p>
-        <a href="/profile/{{user.id}}" class="card-link text-module"><i>Consultar Personajes</i></a>
+        <a href="/app/profile/{{user.id}}" class="card-link text-module"><i>Consultar Personajes</i></a>
     </div>
     </div>
 

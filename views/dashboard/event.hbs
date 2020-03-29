@@ -1,9 +1,17 @@
 <div class="card mb-3 module">
       <img src="https://cache.escapistmagazine.com/2019/09/inn_of_heroes_by_atomiiii-dc2oxlu-800x400.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
+      <div class="card-body" style="margin-bottom: 1rem;">
         <h5 class="card-title text-module"><b>{{event.name}}</b></h5>
         <p class="card-text text-module">{{event.description}}</p>
-        <a href="/app/campaign/1/event/1/create-form" class="card-link text-module"><i>What will our adventurers do?</i></a>
-        <a href="/app/campaign/1" class="card-link text-module"><i>Have our heroes abandoned us?</i></a>
+        <a href="/app/campaign/1/event/1/create-form" class="card-link text-module"><i>¿Qué harán nuestros heroés?</i></a>
+        <a href="/app/campaign/1" class="card-link text-module"><i>¿Nos habrán abandonado?</i></a>
       </div>
 </div>
+{{#each responses.responses}}
+  <div class="card mb-3 module">
+    <div class="card-body" >
+      <h5 class="card-title text-module" style="margin-bottom: 1rem;"><b>{{title}}</b></h5>
+      <p class="card-text text-module">{{description}}</p>
+    </div>
+  </div>
+{{/each}}
