@@ -96,11 +96,8 @@ exports.addplayer = (req,res) => {
 exports.profile = (req,res) => {
   UserModel.find(req.params.id)
     .then(user => {
-      AdventurerModel.findByMaster(req.params.id)
-      .then(adventurers => {
         let adv = {"adv": [{id: "1", name: "Jericho"}]};
         console.log(adv);
         res.render('dashboard/profile', {user:user, adv:adv});
-      });
     });
 }
