@@ -1,14 +1,72 @@
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1>Perfil de {{user.name}}</h1>
-            <h3>Identificador: {{user.id}}</h3>
-            <h5>Correo: {{user.email}}</h5>
-            <h5>Aventureros:</h5>
-             {{#each adv.adv}}
-                <h6>{{name}}</h6>
-             {{/each}}
-             <a href="/app/dashboard" class="btn btn-info">Regresar</a>
+
+    <h1>Perfil de {{user.name}}</h1>
+    <br>
+
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header module" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link text-module" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Identidicador del Jugador
+                </button>
+            </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                Necesitaras este número para que te puedan invitar a campañas, también podras usarlo como un número específico y único para tu cuenta.
+                <br>
+                <br>
+                Tú número de identificador es: <b>{{user.id}}</b>
+            </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header module" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Información del Usuario
+                </button>
+            </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                Aquí encontraras información específica de tu usuario y de tu cuenta ¡No la olvides para entrar a Dungeon Companion!
+                <br>
+                <br>
+                El correo electrónico asociado a esta cuenta es: <b>{{user.email}}</b>
+                <br>
+                <br>
+                En esta aventura, tú tienes un rol de: <b>{{user.role}}</b>.
+            </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header module" id="headingThree">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Personajes Jugables
+                </button>
+            </h2>
+            </div>
+            <div id="collapseThree" class="collapse collapse-character" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body body-character">
+                Tus personajes son la ventana al mundo de la campaña, tu avatar en ella y quien terminara cubriendose de gloria o teniendo el más horrendo de los finales. A continuación podras ver los aventureros que tienes y sus caracteristicas.
+                <br>
+                <br>
+                {{#each adv.adv}}
+                Nombre del personaje: <b>{{name}}</b>
+                <br>
+                Clase: <b>Paladín</b>
+                <br>
+                Raza: <b>Aasimar</b>
+                {{/each}}
+            </div>
+            </div>
         </div>
     </div>
+    <br>
+    <a href="/app/dashboard" class="btn btn-primary confirm-btn">Regresar</a>
+
 </div>

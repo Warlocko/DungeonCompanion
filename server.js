@@ -37,7 +37,7 @@ app.use(express.urlencoded({ extended: true }))
 // Configuraciones de las sesiones
 app.use(cookieParser());
 app.use(session({
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 1800000 },
   store: sessionStore,
   saveUninitialized: true,
   resave: 'true',

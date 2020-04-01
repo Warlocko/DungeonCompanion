@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dungeon Companeon | Inicio</title>
-  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <title>Dungeon Companeon</title>
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   
@@ -28,6 +27,34 @@
       font-family: 'Nunito', sans-serif;
       color: white !important;
     }
+
+    .campaign-container{
+      margin: 30px;
+    }
+
+    .campaign-form{
+      width: 70%;
+      margin-left: 15%;
+    }
+
+    .confirm-btn{
+      background-color: #674ea7;
+      border: #674ea7;
+      width: 60%;
+      margin-left: 20%;
+    }
+
+    .collapse-character{
+      background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), url(https://i.pinimg.com/originals/2f/f2/ec/2ff2ecf64b296eaa362f00ced13bef57.png);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .body-character{
+      opacity: 100% !important;
+      color: black;
+    }
   </style>
 </head>
 
@@ -41,6 +68,11 @@
             <a class="nav-link" href="/app/campaign/1">Mapa</a>
           </li>
           <li class="nav-item ">
+            <a class="nav-link" href="/app/profile/{{user.id}}">Cuenta</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
             <form>
               <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
             </form>
