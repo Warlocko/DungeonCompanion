@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h1>Perfil de {{user.name}}</h1>
+    <h1>Perfil de {{user.username}}</h1>
     <br>
 
     <div class="accordion" id="accordionExample">
@@ -8,7 +8,7 @@
             <div class="card-header module" id="headingOne">
             <h2 class="mb-0">
                 <button class="btn btn-link text-module" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Identidicador del Jugador
+                Identificador del Jugador
                 </button>
             </h2>
             </div>
@@ -55,12 +55,13 @@
                 Tus personajes son la ventana al mundo de la campaña, tu avatar en ella y quien terminara cubriendose de gloria o teniendo el más horrendo de los finales. A continuación podras ver los aventureros que tienes y sus caracteristicas.
                 <br>
                 <br>
-                {{#each adv.adv}}
+                {{#each adventurers}}
                 Nombre del personaje: <b>{{name}}</b>
                 <br>
-                Clase: <b>Paladín</b>
+                Clase: <b>{{class}}</b>
                 <br>
-                Raza: <b>Aasimar</b>
+                Raza: <b>{{race}}</b>
+                <br><br>
                 {{/each}}
             </div>
             </div>

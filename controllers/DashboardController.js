@@ -1,6 +1,7 @@
 let UserModel = require('../models/User');
 let AdventurerModel = require('../models/Adventurer');
 let CampaignModel = require('../models/Campaign');
+let EventModel = require('../models/Event')
 
 exports.index = (req, res) => {
   let user = req.user;
@@ -44,10 +45,10 @@ exports.event = (req,res) => {
 }
 
 exports.newevent = (req,res) => {
-
-  //Add event to database
-
-  res.redirect('/app//campaign/1');
+  EventModel.create({name: req.body.name, description: req.body.description})
+  .then((event) => {
+    res.redirect('/app/dashboard')
+  });
 }
 exports.ansevent = (req,res) => {
   let cmpid = req.params.cmpid;
@@ -72,14 +73,15 @@ exports.newplayer = (req,res) => {
 }
 
 exports.allevents = (req,res) => {
-
-  //Mostrar todos las respuestas de jugadores a eventos de la campaña
+  EventModel.findAll()
+    .then((events) => {
+      
+    })
 
   res.redirect('/app/campaign/1');
 }
 
 exports.newcampaign = (req,res) =>{
-  console.log(req.body);
   CampaignModel.create({name: req.body.name, description: req.body.description})
   .then(
     res.redirect('/app/dashboard')
@@ -96,8 +98,13 @@ exports.addplayer = (req,res) => {
 exports.profile = (req,res) => {
   UserModel.find(req.params.id)
     .then(user => {
-        let adv = {"adv": [{id: "1", name: "Jericho"}]};
-        console.log(adv);
-        res.render('dashboard/profile', {user:user, adv:adv});
+        console.log(user.id)
+        AdventurerModel.findByMaster(user.id)
+        .then(adventurers => {
+            console.log(adventurers);
+            res.render('dashboard/profile', {user:user, adventurers:adventurers});
+          }).catch((error) => {
+            console.log('ya valio')
+          })
     });
 }

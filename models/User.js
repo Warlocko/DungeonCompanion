@@ -20,8 +20,6 @@ exports.find = (id) => {
     console.log("The read failed: " + errorObject.code);
   });
   })
-  
-  
 }
 
 /**
@@ -32,9 +30,9 @@ exports.findByEmail = (email) => {
     let user = null
   usuariosRef.orderByChild('email').equalTo(email).on("value", function(snapshot) {
     snapshot.forEach(function(data) {   
-            this.user = data.val()
-            if(this.user){
-              resolve(this.user)
+            user = data.val()
+            if(user){
+              resolve(user)
             }
         })
     if(!snapshot.hasChildren()){
@@ -63,5 +61,16 @@ exports.create = (user) => {
 }
 
 exports.findAll = () => {
-  return usuariosRef
+  return new Promise((resolve,reject) => {
+    usuariosRef.on("value", function(snapshot) {
+      let users = snapshot.val()
+      if(users){
+        resolve(users);
+      }else{
+        reject(null)
+      }
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+  })
 }

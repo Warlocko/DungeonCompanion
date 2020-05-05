@@ -15,10 +15,9 @@ exports.create = (campaign) => {
     return new Promise((resolve,reject) => {
         campaignRef.on("value", function(snapshot){
           if(snapshot.val()){
-            console.log(snapshot.val())
             resolve(snapshot.val())
           }else{
-            reject('No hay campaigns')
+            reject(null)
           }
         })
     })

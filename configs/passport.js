@@ -11,7 +11,6 @@ const userTableFields = {
 const verifyCallback = async (email, password, done) => {
 userModel.findByEmail(email)
 .then((user) => {
-  console.log(user)
       if (!user) {
         return done(null, false);
       }
