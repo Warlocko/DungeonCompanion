@@ -8,10 +8,10 @@ const userTableFields = {
   passwordField: 'password'
 };
 
-const verifyCallback = (email, password, done) => {
-  userModel.findByEmail(email)
-    .then((user) => {
-      // Si no encuentra un usuario entonces regresa falso
+const verifyCallback = async (email, password, done) => {
+userModel.findByEmail(email)
+.then((user) => {
+  console.log(user)
       if (!user) {
         return done(null, false);
       }
@@ -23,10 +23,10 @@ const verifyCallback = (email, password, done) => {
       } else {
         return done(null, false);
       }
-    })
-    .catch((err) => {
-      done(err);
-    });
+    }
+).catch((message) => {
+  return done(null, false)
+})
 }
 
 const strategy  = new LocalStrategy(userTableFields, verifyCallback);
