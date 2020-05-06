@@ -36,16 +36,28 @@
         <a href="/app/campaign/1" class="card-link text-module"><i>Entrar a la campaña...</i></a>
       </div>
     </div>
-
-    <div class="card mb-3 module">
-      <img src="https://geekandsundry.com/wp-content/uploads/2016/09/DD-climax-1024x544.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title text-module"><b>Personaje</b></h5>
-        <p class="card-text text-module">De la fuerza de la espada a el poder de la magia innata, pasando por la habiliad del arco y los artificios, una gran variedad de personas coloridad caminan por el mundo, pero... ¿Cuál eres tú?</p>
-        <p class="card-text"><small class="text-muted text-module">Consulta tus personajes</small></p>
-        <a href="/app/profile/{{user.id}}" class="card-link text-module"><i>Consultar Personajes</i></a>
-    </div>
-    </div>
+    
+    {{#if isAdmin}}
+      <div class="card mb-3 module">
+        <img src="https://cdnb.artstation.com/p/assets/images/images/011/678/751/large/vladimir-krisetskiy-tavern-06.jpg?1530816108" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text-module"><b>Jugadores</b></h5>
+          <p class="card-text text-module">Gestionar los personajes de tu campaña es vital para que tu historia y universo cobren vida y se vuelva realmente una historia digna de convertirse en leyenda y sus heroes cubiertos en la glroia eterna</p>
+          <p class="card-text"><small class="text-muted text-module">Consulta tus jugadores</small></p>
+          <a href="/app/profile/{{user.id}}" class="card-link text-module"><i>Consultar Jugadores</i></a>
+        </div>
+      </div>
+    {{else}}
+     <div class="card mb-3 module">
+        <img src="https://geekandsundry.com/wp-content/uploads/2016/09/DD-climax-1024x544.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text-module"><b>Personaje</b></h5>
+          <p class="card-text text-module">De la fuerza de la espada a el poder de la magia innata, pasando por la habiliad del arco y los artificios, una gran variedad de personas coloridad caminan por el mundo, pero... ¿Cuál eres tú?</p>
+          <p class="card-text"><small class="text-muted text-module">Consulta tus personajes</small></p>
+          <a href="/app/profile/{{user.id}}" class="card-link text-module"><i>Consultar Personajes</i></a>
+        </div>
+      </div>
+    {{/if}}
 
   </div>
 </main>
