@@ -14,5 +14,6 @@ router.post('/dashboard/crevent', dashboardController.newevent);
 router.post('/dashboard/create-campaign', dashboardController.newcampaign);
 router.post('/campaign/:cmpid/event/:evid/send', dashboardController.anseventsend);
 router.get('/profile/:id', dashboardController.profile);
+router.get('/profile/:id/addplayer', dashboardController.addplayerDM);
 
 module.exports = router;

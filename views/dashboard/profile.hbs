@@ -42,29 +42,61 @@
             </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header module" id="headingThree">
-            <h2 class="mb-0">
-                <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Personajes Jugables
-                </button>
-            </h2>
+
+        {{#eq user.role 'PC'}}
+            <div class="card">
+                <div class="card-header module" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Personajes Jugables
+                        </button>
+                    </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse collapse-character" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body body-character">
+                        Tus personajes son la ventana al mundo de la campaña, tu avatar en ella y quien terminara cubriendose de gloria o teniendo el más horrendo de los finales. A continuación podras ver los aventureros que tienes y sus caracteristicas.
+                        <br>
+                        <br>
+                        {{#each adv.adv}}
+                        Nombre del personaje: <b>{{name}}</b>
+                        <br>
+                        Clase: <b>Paladín</b>
+                        <br>
+                        Raza: <b>Aasimar</b>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
-            <div id="collapseThree" class="collapse collapse-character" aria-labelledby="headingThree" data-parent="#accordionExample">
-            <div class="card-body body-character">
-                Tus personajes son la ventana al mundo de la campaña, tu avatar en ella y quien terminara cubriendose de gloria o teniendo el más horrendo de los finales. A continuación podras ver los aventureros que tienes y sus caracteristicas.
-                <br>
-                <br>
-                {{#each adv.adv}}
-                Nombre del personaje: <b>{{name}}</b>
-                <br>
-                Clase: <b>Paladín</b>
-                <br>
-                Raza: <b>Aasimar</b>
-                {{/each}}
+        {{/eq}}
+
+        {{#eq user.role 'DM'}}
+            <div class="card">
+                <div class="card-header module" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Lista de jugadores y aventureros
+                        </button>
+                    </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse collapse-character" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body body-character">
+                        Los jugadores que pueblan tu mundo y tu campaña serán los que iluminen y hagan que tu historia cobre vida, en esta sección puedes administrarlos y tener un manejo de lo que ellos son y han conseguido.
+                        <br>
+                        <br>
+                        {{#each adv.adv}}
+                        Nombre del personaje: <b>{{name}}</b>
+                        <br>
+                        Clase: <b>Paladín</b>
+                        <br>
+                        Raza: <b>Aasimar</b>
+                        {{/each}}
+                        <br>
+                        <a href="/app/profile/{{user.id}}/addplayer" class="btn btn-primary confirm-btn">Agregar nuevo aventurero</a>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
+        {{/eq}}
+
     </div>
     <br>
     <a href="/app/dashboard" class="btn btn-primary confirm-btn">Regresar</a>

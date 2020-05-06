@@ -101,3 +101,7 @@ exports.profile = (req,res) => {
         res.render('dashboard/profile', {user:user, adv:adv});
     });
 }
+
+exports.addplayerDM = (req,res) => {
+  res.render('dashboard/addcharacter')
+}
