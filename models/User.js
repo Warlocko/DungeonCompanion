@@ -14,11 +14,18 @@ exports.find = (id) => {
       if(user){
         resolve(snapshot.val());
       }else{
-        reject('User error')
+        reject('No se encontró un usuario con esa id.')
       }
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
+  })
+}
+
+exports.addPlayer = (user,dm_id) => {
+  return usuariosRef.child(dm_id).child('jugadores').child(user.id).set({
+    id: user.id,
+    name: user.username
   })
 }
 

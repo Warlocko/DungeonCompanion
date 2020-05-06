@@ -23,3 +23,10 @@ exports.create = (campaign) => {
         })
     })
   }
+
+exports.addPlayer = (user,campaign_id) => {
+   return campaignRef.child(campaign_id).child('jugadores').child(user.id).set({
+     id: user.id,
+     name: user.username
+   })
+}

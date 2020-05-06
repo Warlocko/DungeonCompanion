@@ -24,7 +24,7 @@ exports.userList = (req, res) => {
 exports.map = (req,res) =>{
 	//Do a DB request for a map based on id
 
-	res.render('dashboard/map')
+	res.render('dashboard/map', {cmpid: req.params.cmpid})
 
 }
 exports.cmpmap = (req,res) =>{
@@ -69,8 +69,7 @@ exports.anseventsend = (req,res) => {
 }
 
 exports.newplayer = (req,res) => {
-
-  res.render('dashboard/player-invite')
+  res.render('dashboard/player-invite', {cmpid: req.params.cmpid})
 }
 
 exports.allevents = (req,res) => {
@@ -90,10 +89,21 @@ exports.newcampaign = (req,res) =>{
 }
 
 exports.addplayer = (req,res) => {
+  cmpid = req.params.cmpid
+  UserModel.find(req.body.id)
+    .then((user) => {
+      CampaignModel.addPlayer(user,cmpid)
+        .then(() => {
+          UserModel.addPlayer(user,req.user.id)
+            .then(() => {
+              res.redirect(`/app/campaign/${cmpid}`);
+            })
+        })
+    }).catch((error) => {
+      res.render('dashboard/player-invite', {cmpid: cmpid, playerError: error})
+    })
 
-  //Agregar al jugador a la campaña
-
-  res.redirect('/app/campaign/1');
+  
 }
 
 exports.profile = (req,res) => {
