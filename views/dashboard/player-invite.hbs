@@ -4,7 +4,7 @@
       <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Un Nuevo Aventurero se Une</b></h1>
     </div>
     {{#if playerError}}
-      <div class="alert alert-danger">
+      <div class="alert alert-danger campaign-form">
         {{playerError}}
       </div>
     {{/if}}
@@ -13,6 +13,6 @@
       <label for="inputDesc">ID del Jugador</label>
     </div>
     <br>
-    <button class="btn btn-lg btn-primary btn-block camp-btn confirm-btn" type="submit">Invitar</button>
+    <button class="btn btn-lg btn-primary btn-block camp-btn confirm-btn" href="/app/campaign/{{id}}" type="submit">Invitar</button>
   </form>
 </div>
