@@ -36,8 +36,6 @@ exports.create = (campaign) => {
           })
           if(childSnapshot.child('jugadores').hasChild(user_id) || campaignDM==user_id){
             campaigns.push(childSnapshot.val())
-          }else{
-            
           }
         })
         if(campaigns!=[]){

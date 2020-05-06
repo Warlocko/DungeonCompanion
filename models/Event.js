@@ -9,50 +9,63 @@ exports.create = (event) => {
     name: event.name,
     description: event.description,
     img_url: event.img_url,
-    campaign_id: event.campaign_id
+    campaign_id: event.campaign_id,
+    coordX: 0,
+    coordY: 0
   });
 }
 
 exports.findById = (id) => {
-    return new Promise((resolve,reject) => {
-        let event = null
-      eventsRef.orderByChild('id').equalTo(id).on("value", function(snapshot) {
-        snapshot.forEach(function(data) {   
-                event = data.val()
-                if(event){
-                  resolve(event)
-                }
-            })
-        if(!snapshot.hasChildren()){
-          reject(null)
+  return new Promise((resolve, reject) => {
+    let event = null
+    eventsRef.orderByChild('id').equalTo(id).on("value", function (snapshot) {
+      snapshot.forEach(function (data) {
+        event = data.val()
+        if (event) {
+          resolve(event)
         }
-        });
+      })
+      if (!snapshot.hasChildren()) {
+        reject(null)
+      }
     });
+  });
 }
 
 exports.findByCampaignId = (campaign_id) => {
-    return new Promise((resolve,reject) => {
-        eventsRef.orderByChild('campaign_id').equalTo(campaign_id).on("value", function(snapshot) {
-          if(snapshot.val()){
-              resolve(snapshot.val())
-          }else{
-              reject(null)
-          }
-          });
-      });
+  let events = []
+  let campaignID = ""
+  return new Promise((resolve, reject) => {
+    eventsRef.on("value", function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        eventsnRef.child(childSnapshot.key).child('campaign_id').on("value", function (cmpid) {
+          campaignID = cmpid.val()
+        })
+        if (campaignID == campaign_id) {
+          console.log("event: "+childSnapshot.val())
+          events.push(childSnapshot.val())
+        }
+      })
+      if(events!=[]){
+        resolve(events)
+      }else{
+        reject([])
+      }
+    });
+  });
 }
 
 exports.findAll = () => {
-    return new Promise((resolve,reject) => {
-      eventsRef.on("value", function(snapshot) {
-        let events = snapshot.val()
-        if(events){
-          resolve(events);
-        }else{
-          reject(null)
-        }
+  return new Promise((resolve, reject) => {
+    eventsRef.on("value", function (snapshot) {
+      let events = snapshot.val()
+      if (events) {
+        resolve(events);
+      } else {
+        reject(null)
+      }
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
-    })
-  }
+  })
+}
