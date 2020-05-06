@@ -7,7 +7,7 @@ exports.index = (req, res) => {
   let user = req.user;
   let isAdmin = req.user.role == "DM";
   CampaignModel.findAll().then((campaigns) =>{
-    res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns});
+    res.render('dashboard/index', {user: req.user, isAdmin: isAdmin, campaigns: campaigns});
   });
 }
 
