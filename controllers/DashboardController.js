@@ -118,3 +118,7 @@ exports.profile = (req,res) => {
           })
     });
 }
+
+exports.addplayerDM = (req,res) => {
+  res.render('dashboard/addcharacter')
+}
