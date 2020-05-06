@@ -6,7 +6,7 @@ let EventModel = require('../models/Event')
 exports.index = (req, res) => {
   let user = req.user;
   let isAdmin = req.user.role == "DM";
-  CampaignModel.findAll().then((campaigns) =>{
+  CampaignModel.findByUserId(user.id).then((campaigns) =>{
     res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns});
   }).catch((campaigns) => {
     res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns})
@@ -46,7 +46,7 @@ exports.event = (req,res) => {
 }
 
 exports.newevent = (req,res) => {
-  EventModel.create({name: req.body.name, description: req.body.description, campaign_id: req.params.cmpid})
+  EventModel.create({name: req.body.name, description: req.body.description, img_url: req.body.img_url, campaign_id: req.params.cmpid})
   .then((event) => {
     res.redirect('/app/dashboard')
   });
@@ -82,7 +82,7 @@ exports.allevents = (req,res) => {
 }
 
 exports.newcampaign = (req,res) =>{
-  CampaignModel.create({name: req.body.name, description: req.body.description, DM_id: req.user.id})
+  CampaignModel.create({name: req.body.name, description: req.body.description, img_url: req.body.img_url, DM_id: req.user.id})
   .then(
     res.redirect('/app/dashboard')
   );

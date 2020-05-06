@@ -8,6 +8,7 @@ exports.create = (event) => {
     id: key,
     name: event.name,
     description: event.description,
+    img_url: event.img_url,
     campaign_id: event.campaign_id
   });
 }

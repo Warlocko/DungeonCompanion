@@ -8,6 +8,7 @@ exports.create = (campaign) => {
       id: key,
       name: campaign.name,
       description: campaign.description,
+      img_url: campaign.img_url,
       DM_id: campaign.DM_id
     });
   }
@@ -21,6 +22,30 @@ exports.create = (campaign) => {
             reject([])
           }
         })
+    })
+  }
+
+  exports.findByUserId = (user_id) => {
+    let campaigns = []
+    let campaignDM = ""
+    return new Promise((resolve, reject) => {
+      campaignRef.on("value", function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+          campaignRef.child(childSnapshot.key).child('DM_id').on("value",function(dm) {
+            campaignDM = dm.val()
+          })
+          if(childSnapshot.child('jugadores').hasChild(user_id) || campaignDM==user_id){
+            campaigns.push(childSnapshot.val())
+          }else{
+            
+          }
+        })
+        if(campaigns!=[]){
+          resolve(campaigns)
+        }else{
+          reject([])
+        }
+      })
     })
   }
 
