@@ -7,7 +7,8 @@ exports.create = (event) => {
   return eventsRef.child(key).set({
     id: key,
     name: event.name,
-    description: event.description
+    description: event.description,
+    campaign_id: event.campaign_id
   });
 }
 

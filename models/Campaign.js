@@ -7,7 +7,8 @@ exports.create = (campaign) => {
     return campaignRef.child(key).set({
       id: key,
       name: campaign.name,
-      description: campaign.description
+      description: campaign.description,
+      DM_id: campaign.DM_id
     });
   }
 
@@ -17,7 +18,7 @@ exports.create = (campaign) => {
           if(snapshot.val()){
             resolve(snapshot.val())
           }else{
-            reject(null)
+            reject([])
           }
         })
     })

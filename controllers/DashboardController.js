@@ -7,7 +7,9 @@ exports.index = (req, res) => {
   let user = req.user;
   let isAdmin = req.user.role == "DM";
   CampaignModel.findAll().then((campaigns) =>{
-    res.render('dashboard/index', {user: req.user, isAdmin: isAdmin, campaigns: campaigns});
+    res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns});
+  }).catch((campaigns) => {
+    res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns})
   });
 }
 
@@ -26,13 +28,12 @@ exports.map = (req,res) =>{
 
 }
 exports.cmpmap = (req,res) =>{
-  //Do a DB request for a map storing
-
   res.render('dashboard/campaignForm')
 
 }
 exports.frmevent = (req,res) =>{
-  res.render('dashboard/event-form');
+  cmpid = req.params.cmpid
+  res.render('dashboard/event-form', {cmpid: cmpid});
 }
 exports.event = (req,res) => {
   console.log(req);
@@ -45,7 +46,7 @@ exports.event = (req,res) => {
 }
 
 exports.newevent = (req,res) => {
-  EventModel.create({name: req.body.name, description: req.body.description})
+  EventModel.create({name: req.body.name, description: req.body.description, campaign_id: req.params.cmpid})
   .then((event) => {
     res.redirect('/app/dashboard')
   });
@@ -82,7 +83,7 @@ exports.allevents = (req,res) => {
 }
 
 exports.newcampaign = (req,res) =>{
-  CampaignModel.create({name: req.body.name, description: req.body.description})
+  CampaignModel.create({name: req.body.name, description: req.body.description, DM_id: req.user.id})
   .then(
     res.redirect('/app/dashboard')
   );
@@ -101,10 +102,9 @@ exports.profile = (req,res) => {
         console.log(user.id)
         AdventurerModel.findByMaster(user.id)
         .then(adventurers => {
-            console.log(adventurers);
             res.render('dashboard/profile', {user:user, adventurers:adventurers});
-          }).catch((error) => {
-            console.log('ya valio')
+          }).catch((adventurers) => {
+            res.render('dashboard/profile', {user:user, adventurers:adventurers})
           })
     });
 }

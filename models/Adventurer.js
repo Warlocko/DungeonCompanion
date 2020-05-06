@@ -8,7 +8,7 @@ exports.findByMaster = (master_id) => {
       if(snapshot.val()){
         resolve(snapshot.val())
       }else{
-        reject(null)
+        reject([])
       }
       });
   });
