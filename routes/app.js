@@ -16,5 +16,6 @@ router.post('/campaign/:cmpid/event/:evid/send', dashboardController.anseventsen
 router.get('/profile/:id', dashboardController.profile);
 router.get('/profile/:id/addAdventurer', dashboardController.addplayerDM);
 router.get('/bestiary', dashboardController.bestiary);
+router.get('/bestiary/:index', dashboardController.beast);
 
 module.exports = router;

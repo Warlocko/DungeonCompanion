@@ -3,6 +3,8 @@ let AdventurerModel = require('../models/Adventurer');
 let CampaignModel = require('../models/Campaign');
 let EventModel = require('../models/Event')
 
+const axios = require('axios');
+
 exports.index = (req, res) => {
   let user = req.user;
   let isAdmin = req.user.role == "DM";
@@ -124,5 +126,28 @@ exports.addplayerDM = (req,res) => {
 }
 
 exports.bestiary = (req,res) => {
-  res.render('dashboard/bestiary')
+  axios.get('http://www.dnd5eapi.co/api/monsters')
+    .then((response) => {
+      let beasts = response.data.results;
+      res.render('dashboard/bestiary', {beasts: beasts})
+    })
+    .catch((error) => {
+      console.log('There was an error: ', error);
+      res.status(500).send('There was an error');
+    })
+}
+
+exports.beast = (req,res) => {
+  index = req.params.index;
+
+  axios.get(`http://www.dnd5eapi.co/api/monsters/${index}`)
+  .then((response) => {
+    console.log(response.data)
+    let info = response.data;
+    res.render(`dashboard/beast`, {info: info})
+  })
+  .catch((error) => {
+    console.log('There was an error: ', error);
+    res.status(500).send('There was an error');
+  })
 }
