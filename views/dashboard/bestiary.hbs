@@ -7,35 +7,25 @@
     </div>
 
     <div id="accordion">
-        <div class="card">
-            <div class="card-header module" id="headingOne">
-            <h5 class="mb-0">
-                <button class="btn btn-link text-module" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Fénix
-                </button>
-            </h5>
-            </div>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card-body">
-                Phoenixes were enormous birds with brightly colored feathers ranging from orange to red and violet, and blue-violet beaks and claws. Their eyes were a glowing ruby color. A phoenix's body was naturally bright and shed its own light. Phoenix bodies were almost immaterial, composed of flame taken solid shape. For that reason, they were capable of passing through extremely narrow passages and of engulfing opponents within their fiery bodies.
-            </div>
-            </div>
-        </div>
+        {{#each beasts}}
+            <div class="card">
+                <div class="card-header module" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link text-module" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            {{name}}
+                        </button>
+                    </h5>
+                </div>
 
-        <div class="card">
-            <div class="card-header module" id="headingTwo">
-            <h5 class="mb-0">
-                <button class="btn btn-link collapsed text-module" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Dragón
-                </button>
-            </h5>
+                <div class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <a href="/app/bestiary/{{index}}"><button type="button" class="btn btn-link linko">Revisar las estadísticas de {{name}}</button></a>
+                    </div>
+                </div>
             </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-            <div class="card-body">
-                Dragons were very powerful and magical creatures. There were several types of dragons, the most common of which were chromatic and metallic which were evil and good respectively. They were an ancient race. Few species that still exist can claim longer lineage. Dragons were the bane of the creator races of Toril; their line was so old, they had their own realm during the first recorded exploits of the elves. In recent times, the dragons of Toril were nearly all recluses or at the very least deceptive to their true nature, living amongst other species in polymorphed form.
-            </div>
-            </div>
-        </div>
+            <br>
+        {{/each}}
+
     </div>
 </div>

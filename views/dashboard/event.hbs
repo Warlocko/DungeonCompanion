@@ -2,24 +2,23 @@
   <div class="starter-template">
 
     <div class="card mb-3 module">
-          <img src="https://i.pinimg.com/originals/53/34/48/533448950eafe63c73092ee248fba0b8.jpg" class="card-img-top" alt="...">
+          <img src="{{event.img_url}}" class="card-img-top" alt="...">
           <div class="card-body" style="margin-bottom: 1rem;">
-            <h5 class="card-title text-module"><b>{{event.name}}</b></h5>
+            <h4 class="card-title text-module"><b>{{event.name}}</b></h4>
             <p class="card-text text-module">{{event.description}}</p>
-            <a href="/app/campaign/1/event/1/create-form" class="card-link text-module"><i>¿Qué harán nuestros heroés?</i></a>
-            <a href="/app/campaign/1" class="card-link text-module"><i>¿Nos habrán abandonado?</i></a>
+            <a href="/app/campaign/{{cmpid}}/event/{{event.id}}/create-form" class="card-link text-module"><i>¿Qué harán nuestros heroés?</i></a>
+            <a href="/app/campaign/{{cmpid}}" class="card-link text-module"><i>¿Nos habrán abandonado?</i></a>
           </div>
     </div>
-
-    {{#each responses.responses}}
+    <br>
+    <h3 class="sectionTitle"><b>Respuestas</b></h3>
+    {{#each responses}}
       <div class="card module">
-        <div class="card-header text-module">
-            <b>{{title}}</b>
-        </div>
         <div class="card-body text-module">
+          <h3><b>{{adventurer_name}}</b></h3>
+          <br>
           <blockquote class="blockquote mb-0">
-            <footer class="blockquote-footer text-module">Un aventurero ha decidido actuar...</footer>
-            <p>{{description}}</p>
+            <p class="response-text">-{{description}}</p>
           </blockquote>
         </div>
       </div>
@@ -28,3 +27,16 @@
 
   </div>
 </main>
+
+<style type="text/css">
+  .sectionTitle{
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+  .response-text{
+    margin-bottom: 0;
+  }
+  h3{
+    margin-bottom: 0;
+  }
+</style>

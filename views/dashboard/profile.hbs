@@ -58,11 +58,14 @@
                         <br>
                         <br>
                         {{#each adventurers}}
-                        Nombre del personaje: <b>{{name}}</b>
+                        <div class="adventurer-card">
+                            Nombre del personaje: <b>{{name}}</b>
+                            <br>
+                            Clase: <b>{{class}}</b>
+                            <br>
+                            Raza: <b>{{race}}</b>
+                        </div>
                         <br>
-                        Clase: <b>{{class}}</b>
-                        <br>
-                        Raza: <b>{{race}}</b>
                         {{/each}}
                     </div>
                 </div>
@@ -83,14 +86,6 @@
                         Los jugadores que pueblan tu mundo y tu campaña serán los que iluminen y hagan que tu historia cobre vida, en esta sección puedes administrarlos y tener un manejo de lo que ellos son y han conseguido.
                         <br>
                         <br>
-                        {{#each adventurers}}
-                        Nombre del personaje: <b>{{name}}</b>
-                        <br>
-                        Clase: <b>{{class}}</b>
-                        <br>
-                        Raza: <b>{{race}}</b>
-                        {{/each}}
-                        <br>
                         <a href="/app/profile/{{user.id}}/addAdventurer" class="btn btn-primary confirm-btn">Agregar nuevo aventurero</a>
                     </div>
                 </div>
@@ -102,3 +97,16 @@
     <a href="/app/dashboard" class="btn btn-primary confirm-btn">Regresar</a>
 
 </div>
+
+<style type="text/css">
+    .adventurer-card{
+        width: 90%;
+        margin-left: 5%;
+        background-color: rgba(0,0,0,.35);
+        border-radius: 15px;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: white;
+    }
+</style>
