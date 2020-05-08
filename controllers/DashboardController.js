@@ -1,12 +1,15 @@
 let UserModel = require('../models/User');
 let AdventurerModel = require('../models/Adventurer');
 let CampaignModel = require('../models/Campaign');
+let EventModel = require('../models/Event')
 
 exports.index = (req, res) => {
   let user = req.user;
   let isAdmin = req.user.role == "DM";
-  CampaignModel.findAll().then((campaigns) =>{
+  CampaignModel.findByUserId(user.id).then((campaigns) =>{
     res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns});
+  }).catch((campaigns) => {
+    res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns})
   });
 }
 
@@ -21,17 +24,16 @@ exports.userList = (req, res) => {
 exports.map = (req,res) =>{
 	//Do a DB request for a map based on id
 
-	res.render('dashboard/map')
+	res.render('dashboard/map', {cmpid: req.params.cmpid})
 
 }
 exports.cmpmap = (req,res) =>{
-  //Do a DB request for a map storing
-
   res.render('dashboard/campaignForm')
 
 }
 exports.frmevent = (req,res) =>{
-  res.render('dashboard/event-form');
+  cmpid = req.params.cmpid
+  res.render('dashboard/event-form', {cmpid: cmpid});
 }
 exports.event = (req,res) => {
   console.log(req);
@@ -44,10 +46,10 @@ exports.event = (req,res) => {
 }
 
 exports.newevent = (req,res) => {
-
-  //Add event to database
-
-  res.redirect('/app//campaign/1');
+  EventModel.create({name: req.body.name, description: req.body.description, img_url: req.body.img_url, campaign_id: req.params.cmpid})
+  .then((event) => {
+    res.redirect('/app/dashboard')
+  });
 }
 exports.ansevent = (req,res) => {
   let cmpid = req.params.cmpid;
@@ -67,41 +69,60 @@ exports.anseventsend = (req,res) => {
 }
 
 exports.newplayer = (req,res) => {
-
-  res.render('dashboard/player-invite')
+  res.render('dashboard/player-invite', {cmpid: req.params.cmpid})
 }
 
 exports.allevents = (req,res) => {
-
-  //Mostrar todos las respuestas de jugadores a eventos de la campaña
+  EventModel.findAll()
+    .then((events) => {
+      
+    })
 
   res.redirect('/app/campaign/1');
 }
 
 exports.newcampaign = (req,res) =>{
-  console.log(req.body);
-  CampaignModel.create({name: req.body.name, description: req.body.description})
+  CampaignModel.create({name: req.body.name, description: req.body.description, img_url: req.body.img_url, DM_id: req.user.id})
   .then(
     res.redirect('/app/dashboard')
   );
 }
 
 exports.addplayer = (req,res) => {
+  cmpid = req.params.cmpid
+  UserModel.find(req.body.id)
+    .then((user) => {
+      CampaignModel.addPlayer(user,cmpid)
+        .then(() => {
+          UserModel.addPlayer(user,req.user.id)
+            .then(() => {
+              res.redirect(`/app/campaign/${cmpid}`);
+            })
+        })
+    }).catch((error) => {
+      res.render('dashboard/player-invite', {cmpid: cmpid, playerError: error})
+    })
 
-  //Agregar al jugador a la campaña
-
-  res.redirect('/app/campaign/1');
+  
 }
 
 exports.profile = (req,res) => {
   UserModel.find(req.params.id)
     .then(user => {
-        let adv = {"adv": [{id: "1", name: "Jericho"}]};
-        console.log(adv);
-        res.render('dashboard/profile', {user:user, adv:adv});
+        console.log(user.id)
+        AdventurerModel.findByMaster(user.id)
+        .then(adventurers => {
+            res.render('dashboard/profile', {user:user, adventurers:adventurers});
+          }).catch((adventurers) => {
+            res.render('dashboard/profile', {user:user, adventurers:adventurers})
+          })
     });
 }
 
 exports.addplayerDM = (req,res) => {
   res.render('dashboard/addcharacter')
+}
+
+exports.bestiary = (req,res) => {
+  res.render('dashboard/bestiary')
 }
