@@ -2,6 +2,7 @@ let UserModel = require('../models/User');
 let AdventurerModel = require('../models/Adventurer');
 let CampaignModel = require('../models/Campaign');
 let EventModel = require('../models/Event')
+let ResponseModel = require('../models/Response')
 
 exports.index = (req, res) => {
   let user = req.user;
@@ -22,50 +23,69 @@ exports.userList = (req, res) => {
 }
 
 exports.map = (req,res) =>{
-	//Do a DB request for a map based on id
-
-	res.render('dashboard/map', {cmpid: req.params.cmpid})
-
+  user = req.user
+  EventModel.findByCampaignId(req.params.cmpid)
+    .then((events) => {
+      console.log(events)
+      res.render('dashboard/map', {cmpid: req.params.cmpid, events: events,user:user})
+    }).catch((events)=>{
+      res.render('dashboard/map', {cmpid: req.params.cmpid, events: events,user:user})
+    })
 }
+
+
 exports.cmpmap = (req,res) =>{
   res.render('dashboard/campaignForm')
-
 }
+
+
 exports.frmevent = (req,res) =>{
   cmpid = req.params.cmpid
   res.render('dashboard/event-form', {cmpid: cmpid});
 }
+
+
 exports.event = (req,res) => {
-  console.log(req);
-  let event = {name: "Hombres lobo invaden!", description :"Un grupo de hombres lobo (muy hambrientos) demabulan por el bosque, ¿Qué harán nuestros heroés?"};
-  let response1 = {title: "Un heroe se alza", description:"Jericho utiliza un Arco Largo para atacar a los Hombres Lobo."};
-  let response2 = {title: "Un heroe se alza", description:"Adam utiliza un Nora de Amor para confundir a los Hombres Lobo."};
-  let responses = {responses: [response1,response2]};
-  console.log(responses);
-  res.render('dashboard/event',{event: event, responses: responses});
+  let cmpid = req.params.cmpid
+  let evid = req.params.evid
+  EventModel.findById(evid)
+  .then((event) => {
+    ResponseModel.findByEventId(evid)
+    .then((responses) => {
+      console.log(responses)
+      res.render('dashboard/event',{cmpid: cmpid, event: event, responses: responses});
+    }).catch((responses) => {
+      res.render('dashboard/event',{cmpid: cmpid, event: event, responses: responses});
+    })
+  }).catch((event)=>{
+    console.log("lol")
+  })
 }
 
 exports.newevent = (req,res) => {
+  cmpid = req.params.cmpid
   EventModel.create({name: req.body.name, description: req.body.description, img_url: req.body.img_url, campaign_id: req.params.cmpid})
-  .then((event) => {
-    res.redirect('/app/dashboard')
+  .then(() => {
+    res.redirect(`/app/campaign/${cmpid}`)
   });
 }
+
 exports.ansevent = (req,res) => {
   let cmpid = req.params.cmpid;
   let evid = req.params.evid;
-
-
-  let adv = {"adv": [{id: "1", name: "example adventurer"}]}
-  let item = {"item": [{id: "1", name: "example item"}]}
-
-  res.render('dashboard/answer-event-form', {cmpid: cmpid, evid: evid, adv: adv, item: item});
+  let user_id = req.user.id;
+  AdventurerModel.findByMaster(user_id)
+    .then((adv) => {
+      res.render('dashboard/answer-event-form', {cmpid: cmpid, evid: evid, adv: adv});
+    })
 }
 exports.anseventsend = (req,res) => {
-
-  //Add event to database
-
-  res.redirect('/app/campaign/1');
+  cmpid = req.params.cmpid
+  event_id = req.params.evid
+  ResponseModel.create({description: req.body.description, event_id: event_id, adventurer_name: req.body.adventurer_name})
+    .then(
+      res.redirect(`/app/campaign/${cmpid}`)
+    )
 }
 
 exports.newplayer = (req,res) => {
@@ -78,7 +98,7 @@ exports.allevents = (req,res) => {
       
     })
 
-  res.redirect('/app/campaign/1');
+  res.redirect(`/app/campaign/${cmpid}`);
 }
 
 exports.newcampaign = (req,res) =>{
@@ -102,8 +122,6 @@ exports.addplayer = (req,res) => {
     }).catch((error) => {
       res.render('dashboard/player-invite', {cmpid: cmpid, playerError: error})
     })
-
-  
 }
 
 exports.profile = (req,res) => {
@@ -120,7 +138,19 @@ exports.profile = (req,res) => {
 }
 
 exports.addplayerDM = (req,res) => {
-  res.render('dashboard/addcharacter')
+  UserModel.getPlayers(req.user.id)
+    .then((players) => {
+      res.render('dashboard/addcharacter', {players: players})
+    })
+}
+
+exports.newAdventurer = (req,res) => {
+  id = req.user.id
+  AdventurerModel.createAdventurer({name: req.body.name, race: req.body.race, class: req.body.class, master_id: req.body.master_id})
+   .then(() => {
+      res.redirect(`/app/profile/${id}`)
+   })
+  
 }
 
 exports.bestiary = (req,res) => {

@@ -9,9 +9,7 @@ exports.create = (event) => {
     name: event.name,
     description: event.description,
     img_url: event.img_url,
-    campaign_id: event.campaign_id,
-    coordX: 0,
-    coordY: 0
+    campaign_id: event.campaign_id
   });
 }
 
@@ -38,11 +36,10 @@ exports.findByCampaignId = (campaign_id) => {
   return new Promise((resolve, reject) => {
     eventsRef.on("value", function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
-        eventsnRef.child(childSnapshot.key).child('campaign_id').on("value", function (cmpid) {
+        eventsRef.child(childSnapshot.key).child('campaign_id').on("value", function (cmpid) {
           campaignID = cmpid.val()
         })
         if (campaignID == campaign_id) {
-          console.log("event: "+childSnapshot.val())
           events.push(childSnapshot.val())
         }
       })
