@@ -29,6 +29,22 @@ exports.addPlayer = (user,dm_id) => {
   })
 }
 
+exports.getPlayers = (dm_id) => {
+  let users = []
+  return new Promise ((resolve, reject)=> {
+    usuariosRef.child(dm_id).child('jugadores').on("value", function(snapshot){
+      snapshot.forEach(function(data){
+        users.push(data.val())
+      })
+      if(users){
+        resolve(users)
+      }else{
+        reject([])
+      }
+    })
+  })
+}
+
 /**
  * Encuentra al usuario que tenga el correo indicado
  */
@@ -48,6 +64,8 @@ exports.findByEmail = (email) => {
     });
 });
 }
+
+
 
 /**
  * Crea al usuario con los datos definidos dentro del objeto user

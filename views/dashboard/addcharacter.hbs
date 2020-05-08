@@ -5,25 +5,26 @@
         </div>
 
         <div class="form-label-group campaign-form">
-            <input type="text" name="adv_name" id="inputName" class="form-control" placeholder="Gorlosh">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Gorlosh">
             <label for="inputName">Nombre del aventurero</label>
         </div>
 
         <div class="form-label-group campaign-form">
-            <input type="text" name="adv_race" id="inputName" class="form-control" placeholder="Medio-Orco">
+            <input type="text" name="race" id="race" class="form-control" placeholder="Medio-Orco">
             <label for="inputName">Raza</label>
         </div>
 
         <div class="form-label-group campaign-form">
-            <input type="text" name="adv_class" id="inputName" class="form-control" placeholder="Bárbaro">
+            <input type="text" name="class" id="class" class="form-control" placeholder="Bárbaro">
             <label for="inputName">Clase</label>
         </div>
 
         <div class="form-label-group campaign-form">
-            <select id="player" name="player" class="form-control">
-                <option disabled selected value="PC">Jugador propietario</option>
-                <option value="DM">Director de Juego</option>
-                <option value="PC">Aventurero</option>
+            <select id="master_id" name="master_id" class="form-control">
+                <option disabled selected value="None">Jugador propietario</option>
+                {{#each players}}
+                <option value={{id}}>{{name}}</option>
+                {{/each}}
             </select>
             <label for="inputName">Jugador propietario del aventurero</label>
         </div>

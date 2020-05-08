@@ -3,15 +3,19 @@ const dbRef = firebase.firebaseRef()
 const adventurersRef = dbRef.child('adventurers');
 
 exports.findByMaster = (master_id) => {
-    return new Promise((resolve,reject) => {
-    adventurersRef.orderByChild('master_id').equalTo(master_id).on("value", function(snapshot) {
-      if(snapshot.val()){
-        resolve(snapshot.val())
-      }else{
-        reject([])
-      }
-      });
-  });
+  return new Promise((resolve,reject) => {
+    let adventurers = []
+  adventurersRef.orderByChild('master_id').equalTo(master_id).on("value", function(snapshot) {
+    snapshot.forEach(function(data) {   
+      adventurers.push(data.val())
+    })
+    if(adventurers){
+      resolve(adventurers)
+    }else{
+      reject([])
+    }
+    });
+});
   }
 
 exports.createAdventurer = (adventurer) => {
