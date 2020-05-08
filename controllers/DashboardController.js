@@ -26,7 +26,6 @@ exports.map = (req,res) =>{
   user = req.user
   EventModel.findByCampaignId(req.params.cmpid)
     .then((events) => {
-      console.log(events)
       res.render('dashboard/map', {cmpid: req.params.cmpid, events: events,user:user})
     }).catch((events)=>{
       res.render('dashboard/map', {cmpid: req.params.cmpid, events: events,user:user})
@@ -52,13 +51,11 @@ exports.event = (req,res) => {
   .then((event) => {
     ResponseModel.findByEventId(evid)
     .then((responses) => {
-      console.log(responses)
       res.render('dashboard/event',{cmpid: cmpid, event: event, responses: responses});
     }).catch((responses) => {
       res.render('dashboard/event',{cmpid: cmpid, event: event, responses: responses});
     })
   }).catch((event)=>{
-    console.log("lol")
   })
 }
 
@@ -127,7 +124,6 @@ exports.addplayer = (req,res) => {
 exports.profile = (req,res) => {
   UserModel.find(req.params.id)
     .then(user => {
-        console.log(user.id)
         AdventurerModel.findByMaster(user.id)
         .then(adventurers => {
             res.render('dashboard/profile', {user:user, adventurers:adventurers});
