@@ -22,7 +22,7 @@ function connectToSocketio() {
 
     window.socket.on('room-enter', function(data){
         console.log("Entering Room "+data.roomId)
-        window.location.href = "/app/campaign/"+data.roomId+"";
+        window.location.href = '/app/campaign/'+data.roomId;
     })
 }
 function joinRoom(name,id,username){

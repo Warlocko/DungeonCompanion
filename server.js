@@ -38,7 +38,7 @@ app.set('view engine', extNameHbs);
 let sessionStore = new session.MemoryStore;
 app.use(cookieParser());
 app.use(session({
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 6000000 },
   store: sessionStore,
   saveUninitialized: true,
   resave: 'true',
@@ -72,12 +72,6 @@ io.on('disconnect', (socket) =>{
 io.on('connection', (socket) => {
 
   console.log('Client connected ' + io.engine.clientsCount);
-  socket.emit('toast', {message: "Conectado con el servidor"});
-  let i = 0;
-  setInterval(() => {
-    socket.emit('toast', {message: "Conectado con el servidor"});
-    i++;
-  }, 10000)
   socket.on('message-to-server', (data) => {
     console.log('message received', data);
   });
@@ -88,14 +82,13 @@ socket.on('enter-room',(data)=>{
 	socket.join(data.room);
 	let n = 0
 	let interval = setInterval(() => {
-    io.emit('toast', {message: "El jugador "+data.user+" ha llegado"})
+    io.emit('toast', {message: "Entra "+data.user+", denle una cálida bienvenida"})
     n++;
     if (n < 5) {
     	clearInterval(interval);
     }
   }, 5000)
-  	io.emit('toast', {message: "El jugador "+data.user+" ha llegado"});
-	//socket.to(data.room).emit("toast",{message: "Holi "+data.room})
+  io.emit('toast', {message: "Entra "+data.user+", denle una cálida bienvenida"});
 	io.to(data.room).emit("room-enter",{roomId:data.roomId})
 	io.to(data.room).emit("toast",{message: "El jugador "+data.user+" ha llegado"})
 	
