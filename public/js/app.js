@@ -26,7 +26,8 @@ function connectToSocketio() {
     })
 }
 function joinRoom(name,id,username){
-    console.log("Entering Room "+name);
+    console.log("Entering Room "+username);
+    window.socket.emit('message-to-server', {message: 'oaa, quiere warzone'});
     window.socket.emit('enter-room',{room:name,roomId:id,user:username})
     
     //window.location.href = "/app/campaign/"+id;

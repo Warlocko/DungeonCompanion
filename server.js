@@ -38,7 +38,7 @@ app.set('view engine', extNameHbs);
 let sessionStore = new session.MemoryStore;
 app.use(cookieParser());
 app.use(session({
-  cookie: { maxAge: 6000000 },
+  cookie: { maxAge: 1500000 },
   store: sessionStore,
   saveUninitialized: true,
   resave: 'true',
@@ -62,9 +62,9 @@ app.use('/app/users', authMiddleware.hasAdminPrivileges, adminRoutes);
 
 let activeGame = false;
 let activePlayers = 0; //EDIT HERE EVENTUALLY
-let ans = [{char: "No One",pokemon: "", name: "",monster: ""}]  
+let ans = [{ char: "No One", pokemon: "", name: "", monster: "" }]
 
-io.on('disconnect', (socket) =>{
+io.on('disconnect', (socket) => {
   console.log("Client Disconnected");
 })
 
@@ -72,31 +72,33 @@ io.on('disconnect', (socket) =>{
 io.on('connection', (socket) => {
 
   console.log('Client connected ' + io.engine.clientsCount);
+  socket.emit('toast', { message: "Conectado con el servidor" });
+  let i = 0;
+  setInterval(() => {
+    socket.emit('toast', { message: "Conectado con el servidor" });
+    i++;
+  }, 150000)
   socket.on('message-to-server', (data) => {
     console.log('message received', data);
   });
 
 
-socket.on('enter-room',(data)=>{
-	console.log("Inserting Player "+data.user+" Into "+data.room)
-	socket.join(data.room);
-	let n = 0
-	let interval = setInterval(() => {
-    io.emit('toast', {message: "Entra "+data.user+", denle una cálida bienvenida"})
-    n++;
-    if (n < 5) {
-    	clearInterval(interval);
-    }
-  }, 5000)
-  io.emit('toast', {message: "Entra "+data.user+", denle una cálida bienvenida"});
-	io.to(data.room).emit("room-enter",{roomId:data.roomId})
-	io.to(data.room).emit("toast",{message: "El jugador "+data.user+" ha llegado"})
-	
-})
+  socket.on('enter-room', (data) => {
+    console.log("Inserting Player " + data.user + " Into " + data.room)
+    socket.join(data.room);
+    let n = 0
+    let interval = setInterval(() => {
+      io.emit('toast', { message: "El jugador " + data.user + " ha llegado, denle un cálido aplauso" })
+      n++;
+      if (n < 5) {
+        clearInterval(interval);
+      }
+    }, 5000)
+    io.emit('toast', { message: "El jugador " + data.user + " ha llegado, denle un cálido aplauso" });
+    io.to(data.room).emit("room-enter", { roomId: data.roomId })
+    io.to(data.room).emit("toast", { message: "El jugador " + data.user + " ha llegado, denle un cálido aplauso" })
 
-
-  
-
+  })
 });
 
 // App init
