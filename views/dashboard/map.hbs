@@ -1,14 +1,24 @@
 <main role="main" >
-  <h3><b>El Continente</b></h3>
-  <div class="starter-template container">
-
-    <a href="/app/campaign/1/event/1" id="event">
-    <img src = "https://cdn3.iconfinder.com/data/icons/basic-filled/80/09_BO_POI_1-512.png" alt="event" id = "event"  />
-    </a>
+  <div class="mapWrapper">
+  <h3 class="sectionTitle"><b>El Mundo...</b></h3>
+    <div class="starter-template container">
+    </div>
+  </div>
+  <div class="eventsWrapper">
+    <h3 class="sectionTitle"><b>Eventos</b></h3>
+    {{#each events}}
+      <a href="/app/campaign/{{../cmpid}}/event/{{id}}">
+        <div class="card mb-3 module event-card">
+            <div class="card-body">
+                <h5 class="card-title text-module"><b>{{name}}</b></h5>
+            </div>
+        </div>
+      </a>
+    {{/each}}
   </div>
   <footer content="width=device-width, initial-scale=1.0 bg-dark" class="page-footer">
-    <a href = "/app/campaign/1/event-form"><button type="button" class="btn btn-primary map-btn">Añadir nuevo evento</button></a>
-    <a href = "/app/campaign/1/player-form"><button type="button" class="btn btn-primary map-btn">Añadir Jugador</button></a>
+    <a href = "/app/campaign/{{cmpid}}/event-form"><button type="button" class="btn btn-primary map-btn">Añadir nuevo evento</button></a>
+    <a href = "/app/campaign/{{cmpid}}/player-form"><button type="button" class="btn btn-primary map-btn">Añadir Jugador</button></a>
   </footer>
 
 </main>
@@ -26,15 +36,13 @@
     padding: 0;
     background: transparent url("https://i.imgur.com/CLAraKd.jpg") no-repeat scroll;
     position:absolute;
-    min-width: 1250px;
     width:100%;
     max-width: 1920px;
-    height:77%;
+    height:565px;
+    left: 0;
     max-height: 1080px;
     background-position: center;
-    background-color: #fcfcfc;
-
-    
+    background-color: #fcfcfc; 
   }
   #event{
     width: 60px;
@@ -53,12 +61,44 @@
     width: 100%;
     height: 50px;
     line-height: 50px;
-    background-color: #8e7cc3;
+    background-color: rgba(0,0,0,.0);
   }
   .map-btn{
-      margin-left: 1%;
-      display:inline-block;
-      background-color: #674ea7;
-      border: #674ea7;
-    }
+    margin-left: 1%;
+    display:inline-block;
+    background-color: #674ea7;
+    border: #674ea7;
+    -webkit-box-shadow: 10px 10px 25px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 10px 10px 25px 0px rgba(0,0,0,0.25);
+    box-shadow: 10px 10px 25px 0px rgba(0,0,0,.5);
+  }
+  .mapWrapper{
+    width: 90%;
+    margin-left: 5%;
+  }
+  .eventsWrapper{
+    position: absolute;
+    top: 710px;
+    width: 90%;
+    margin-left: 5%;
+    padding-bottom: 100px;
+  }
+  .event-card{
+    -webkit-box-shadow: 10px 10px 25px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 10px 10px 25px 0px rgba(0,0,0,0.25);
+    box-shadow: 10px 10px 25px 0px rgba(0,0,0,0.25);
+  }
+  .page-footer{
+    position: fixed;
+    bottom: 0;
+  }
+  .sectionTitle{
+    margin-left: 0;
+  }
+  .card-title{
+    margin-bottom: 0;
+  }
+  a:hover{
+    text-decoration: none;
+  }
 </style>

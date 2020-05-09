@@ -1,43 +1,44 @@
-let express = require('express');
-let app = express();
+// Imports
+const express = require('express');
 let webRoutes = require('./routes/web');
 let appRoutes = require('./routes/app');
 let adminRoutes = require('./routes/admin');
 let authMiddleware = require('./middlewares/AuthMiddleware');
 
+// Session imports
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let flash = require('express-flash');
-let sessionStore = new session.MemoryStore;
 let passport = require('passport');
 
-/**
- * Configurations
- */
+// Express app creation
+const app = express();
 
-let appConfig = require('./configs/app');
+//Socket.io
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
-// Configuraciones para el view engine
-let exphbs = require('express-handlebars');
-// Imports a set of helpers for handlebars
-// https://github.com/helpers/handlebars-helpers
-let hbshelpers = require("handlebars-helpers");
-let multihelpers = hbshelpers();
+
+// Configurations
+const appConfig = require('./configs/app');
+
+// View engine configs
+const exphbs = require('express-handlebars');
+const hbshelpers = require("handlebars-helpers");
+const multihelpers = hbshelpers();
 const extNameHbs = 'hbs';
-let hbs = exphbs.create({
+const hbs = exphbs.create({
   extname: extNameHbs,
   helpers: multihelpers
 });
 app.engine(extNameHbs, hbs.engine);
 app.set('view engine', extNameHbs);
 
-// Configuraciones para el bodyparser
-app.use(express.urlencoded({ extended: true }))
-
-// Configuraciones de las sesiones
+// Session configurations
+let sessionStore = new session.MemoryStore;
 app.use(cookieParser());
 app.use(session({
-  cookie: { maxAge: 1800000 },
+  cookie: { maxAge: 60000 },
   store: sessionStore,
   saveUninitialized: true,
   resave: 'true',
@@ -47,20 +48,65 @@ app.use(flash());
 
 // Configuraciones de passport
 require('./configs/passport');
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-/**
- * Routes
- */
+// Receive parameters from the Form requests
+app.use(express.urlencoded({ extended: true }))
+
+// Routes
+app.use('/', express.static(__dirname + '/public'));
 app.use('/', webRoutes);
 app.use('/app', authMiddleware.isAuth, appRoutes);
 app.use('/app/users', authMiddleware.hasAdminPrivileges, adminRoutes);
 
-/**
- * App Init
- */
-app.listen(appConfig.expressPort, () => {
+let activeGame = false;
+let activePlayers = 0; //EDIT HERE EVENTUALLY
+let ans = [{char: "No One",pokemon: "", name: "",monster: ""}]  
+
+io.on('disconnect', (socket) =>{
+  console.log("Client Disconnected");
+})
+
+
+io.on('connection', (socket) => {
+
+  console.log('Client connected ' + io.engine.clientsCount);
+  socket.emit('toast', {message: "Conectado con el servidor"});
+  let i = 0;
+  setInterval(() => {
+    socket.emit('toast', {message: "Conectado con el servidor"});
+    i++;
+  }, 10000)
+  socket.on('message-to-server', (data) => {
+    console.log('message received', data);
+  });
+
+
+socket.on('enter-room',(data)=>{
+	console.log("Inserting Player "+data.user+" Into "+data.room)
+	socket.join(data.room);
+	let n = 0
+	let interval = setInterval(() => {
+    io.emit('toast', {message: "El jugador "+data.user+" ha llegado"})
+    n++;
+    if (n < 5) {
+    	clearInterval(interval);
+    }
+  }, 5000)
+  	io.emit('toast', {message: "El jugador "+data.user+" ha llegado"});
+	//socket.to(data.room).emit("toast",{message: "Holi "+data.room})
+	io.to(data.room).emit("room-enter",{roomId:data.roomId})
+	io.to(data.room).emit("toast",{message: "El jugador "+data.user+" ha llegado"})
+	
+})
+
+
+  
+
+});
+
+// App init
+server.listen(appConfig.expressPort, () => {
   console.log(`Server is listenning on ${appConfig.expressPort}! (http://localhost:${appConfig.expressPort})`);
 });

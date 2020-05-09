@@ -1,21 +1,18 @@
 <div class="campaign-container">
-  <form class="form-signin" method="POST" action="/app/campaign/1/player-invite">
+  <form class="form-signin" method="POST" action="/app/campaign/{{cmpid}}/player-invite">
     <div class="text-center mb-4">
       <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Un Nuevo Aventurero se Une</b></h1>
     </div>
-
-    <div class="form-label-group campaign-form">
-      <input type="text" name="name" id="inputName" class="form-control" placeholder="Aventurero">
-      <label for="inputName">Nombre del Jugador</label>
-    </div>
-
+    {{#if playerError}}
+      <div class="alert alert-danger campaign-form">
+        {{playerError}}
+      </div>
+    {{/if}}
     <div class="form-label-group campaign-form">
       <input type="text" name="id" id="inputID" class="form-control" placeholder="Código de ID">
       <label for="inputDesc">ID del Jugador</label>
     </div>
-
     <br>
-
-    <button class="btn btn-lg btn-primary btn-block camp-btn confirm-btn" type="submit">Invitar</button>
+    <button class="btn btn-lg btn-primary btn-block camp-btn confirm-btn" href="/app/campaign/{{id}}" type="submit">Invitar</button>
   </form>
 </div>

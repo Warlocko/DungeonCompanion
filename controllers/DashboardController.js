@@ -1,12 +1,18 @@
 let UserModel = require('../models/User');
 let AdventurerModel = require('../models/Adventurer');
 let CampaignModel = require('../models/Campaign');
+let EventModel = require('../models/Event')
+let ResponseModel = require('../models/Response')
+
+const axios = require('axios');
 
 exports.index = (req, res) => {
   let user = req.user;
   let isAdmin = req.user.role == "DM";
-  CampaignModel.findAll().then((campaigns) =>{
+  CampaignModel.findByUserId(user.id).then((campaigns) =>{
     res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns});
+  }).catch((campaigns) => {
+    res.render('dashboard/index', {user: user, isAdmin: isAdmin, campaigns: campaigns})
   });
 }
 
@@ -19,85 +25,155 @@ exports.userList = (req, res) => {
 }
 
 exports.map = (req,res) =>{
-	//Do a DB request for a map based on id
-
-	res.render('dashboard/map')
-
+  user = req.user
+  EventModel.findByCampaignId(req.params.cmpid)
+    .then((events) => {
+      res.render('dashboard/map', {cmpid: req.params.cmpid, events: events,user:user})
+    }).catch((events)=>{
+      res.render('dashboard/map', {cmpid: req.params.cmpid, events: events,user:user})
+    })
 }
+
+
 exports.cmpmap = (req,res) =>{
-  //Do a DB request for a map storing
-
   res.render('dashboard/campaignForm')
+}
 
-}
+
 exports.frmevent = (req,res) =>{
-  res.render('dashboard/event-form');
+  cmpid = req.params.cmpid
+  res.render('dashboard/event-form', {cmpid: cmpid});
 }
+
+
 exports.event = (req,res) => {
-  console.log(req);
-  let event = {name: "Hombres lobo invaden!", description :"Un grupo de hombres lobo (muy hambrientos) demabulan por el bosque, ¿Qué harán nuestros heroés?"};
-  let response1 = {title: "Un heroe se alza", description:"Jericho utiliza un Arco Largo para atacar a los Hombres Lobo."};
-  let response2 = {title: "Un heroe se alza", description:"Adam utiliza un Nora de Amor para confundir a los Hombres Lobo."};
-  let responses = {responses: [response1,response2]};
-  console.log(responses);
-  res.render('dashboard/event',{event: event, responses: responses});
+  let cmpid = req.params.cmpid
+  let evid = req.params.evid
+  EventModel.findById(evid)
+  .then((event) => {
+    ResponseModel.findByEventId(evid)
+    .then((responses) => {
+      res.render('dashboard/event',{cmpid: cmpid, event: event, responses: responses});
+    }).catch((responses) => {
+      res.render('dashboard/event',{cmpid: cmpid, event: event, responses: responses});
+    })
+  }).catch((event)=>{
+  })
 }
 
 exports.newevent = (req,res) => {
-
-  //Add event to database
-
-  res.redirect('/app//campaign/1');
+  cmpid = req.params.cmpid
+  EventModel.create({name: req.body.name, description: req.body.description, img_url: req.body.img_url, campaign_id: req.params.cmpid})
+  .then(() => {
+    res.redirect(`/app/campaign/${cmpid}`)
+  });
 }
+
 exports.ansevent = (req,res) => {
   let cmpid = req.params.cmpid;
   let evid = req.params.evid;
-
-
-  let adv = {"adv": [{id: "1", name: "example adventurer"}]}
-  let item = {"item": [{id: "1", name: "example item"}]}
-
-  res.render('dashboard/answer-event-form', {cmpid: cmpid, evid: evid, adv: adv, item: item});
+  let user_id = req.user.id;
+  AdventurerModel.findByMaster(user_id)
+    .then((adv) => {
+      res.render('dashboard/answer-event-form', {cmpid: cmpid, evid: evid, adv: adv});
+    })
 }
 exports.anseventsend = (req,res) => {
-
-  //Add event to database
-
-  res.redirect('/app/campaign/1');
+  cmpid = req.params.cmpid
+  event_id = req.params.evid
+  ResponseModel.create({description: req.body.description, event_id: event_id, adventurer_name: req.body.adventurer_name})
+    .then(
+      res.redirect(`/app/campaign/${cmpid}`)
+    )
 }
 
 exports.newplayer = (req,res) => {
-
-  res.render('dashboard/player-invite')
+  res.render('dashboard/player-invite', {cmpid: req.params.cmpid})
 }
 
 exports.allevents = (req,res) => {
+  EventModel.findAll()
+    .then((events) => {
+      
+    })
 
-  //Mostrar todos las respuestas de jugadores a eventos de la campaña
-
-  res.redirect('/app/campaign/1');
+  res.redirect(`/app/campaign/${cmpid}`);
 }
 
 exports.newcampaign = (req,res) =>{
-  console.log(req.body);
-  CampaignModel.create({name: req.body.name, description: req.body.description})
+  CampaignModel.create({name: req.body.name, description: req.body.description, img_url: req.body.img_url, DM_id: req.user.id})
   .then(
     res.redirect('/app/dashboard')
   );
 }
 
 exports.addplayer = (req,res) => {
-
-  //Agregar al jugador a la campaña
-
-  res.redirect('/app/campaign/1');
+  cmpid = req.params.cmpid
+  UserModel.find(req.body.id)
+    .then((user) => {
+      CampaignModel.addPlayer(user,cmpid)
+        .then(() => {
+          UserModel.addPlayer(user,req.user.id)
+            .then(() => {
+              res.redirect(`/app/campaign/${cmpid}`);
+            })
+        })
+    }).catch((error) => {
+      res.render('dashboard/player-invite', {cmpid: cmpid, playerError: error})
+    })
 }
 
 exports.profile = (req,res) => {
   UserModel.find(req.params.id)
     .then(user => {
-        let adv = {"adv": [{id: "1", name: "Jericho"}]};
-        console.log(adv);
-        res.render('dashboard/profile', {user:user, adv:adv});
+        AdventurerModel.findByMaster(user.id)
+        .then(adventurers => {
+            res.render('dashboard/profile', {user:user, adventurers:adventurers});
+          }).catch((adventurers) => {
+            res.render('dashboard/profile', {user:user, adventurers:adventurers})
+          })
     });
+}
+
+exports.addplayerDM = (req,res) => {
+  UserModel.getPlayers(req.user.id)
+    .then((players) => {
+      res.render('dashboard/addcharacter', {players: players})
+    })
+}
+
+exports.newAdventurer = (req,res) => {
+  id = req.user.id
+  AdventurerModel.createAdventurer({name: req.body.name, race: req.body.race, class: req.body.class, master_id: req.body.master_id})
+   .then(() => {
+      res.redirect(`/app/profile/${id}`)
+   })
+  
+}
+
+exports.bestiary = (req,res) => {
+  axios.get('http://www.dnd5eapi.co/api/monsters')
+    .then((response) => {
+      let beasts = response.data.results;
+      res.render('dashboard/bestiary', {beasts: beasts})
+    })
+    .catch((error) => {
+      console.log('There was an error: ', error);
+      res.status(500).send('There was an error');
+    })
+}
+
+exports.beast = (req,res) => {
+  index = req.params.index;
+
+  axios.get(`http://www.dnd5eapi.co/api/monsters/${index}`)
+  .then((response) => {
+    console.log(response.data)
+    let info = response.data;
+    res.render(`dashboard/beast`, {info: info})
+  })
+  .catch((error) => {
+    console.log('There was an error: ', error);
+    res.status(500).send('There was an error');
+  })
 }

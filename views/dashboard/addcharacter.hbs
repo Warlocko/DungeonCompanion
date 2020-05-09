@@ -1,0 +1,36 @@
+<div class="campaign-container">
+    <form class="form-signin" method="POST">
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Un nuevo aventurero se ha de unir...</b></h1>
+        </div>
+
+        <div class="form-label-group campaign-form">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Gorlosh">
+            <label for="inputName">Nombre del aventurero</label>
+        </div>
+
+        <div class="form-label-group campaign-form">
+            <input type="text" name="race" id="race" class="form-control" placeholder="Medio-Orco">
+            <label for="inputName">Raza</label>
+        </div>
+
+        <div class="form-label-group campaign-form">
+            <input type="text" name="class" id="class" class="form-control" placeholder="Bárbaro">
+            <label for="inputName">Clase</label>
+        </div>
+
+        <div class="form-label-group campaign-form">
+            <select id="master_id" name="master_id" class="form-control">
+                <option disabled selected value="None">Jugador propietario</option>
+                {{#each players}}
+                <option value={{id}}>{{name}}</option>
+                {{/each}}
+            </select>
+            <label for="inputName">Jugador propietario del aventurero</label>
+        </div>
+
+        <br>
+        <button class="btn btn-lg btn-primary btn-block camp-btn confirm-btn" type="submit">Añadir aventurero</button>
+    </form>
+
+</div>

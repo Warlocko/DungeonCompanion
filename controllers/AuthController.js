@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 let userModel = require('../models/User');
 
 exports.login = (req, res) => {
-  let authError = req.query.authError == 1 ? 'Invalid register data' : null;
+  let authError = req.query.authError == 1 ? 'Datos de inicio de sesión incorrectos' : null;
   res.render('auth/login', { layout: 'auth', authError: authError });
 }
 
