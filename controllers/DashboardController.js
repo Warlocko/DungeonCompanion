@@ -158,7 +158,6 @@ exports.bestiary = (req,res) => {
       res.render('dashboard/bestiary', {beasts: beasts})
     })
     .catch((error) => {
-      console.log('There was an error: ', error);
       res.status(500).send('There was an error');
     })
 }
@@ -168,12 +167,10 @@ exports.beast = (req,res) => {
 
   axios.get(`http://www.dnd5eapi.co/api/monsters/${index}`)
   .then((response) => {
-    console.log(response.data)
     let info = response.data;
     res.render(`dashboard/beast`, {info: info})
   })
   .catch((error) => {
-    console.log('There was an error: ', error);
     res.status(500).send('There was an error');
   })
 }

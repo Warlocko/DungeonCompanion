@@ -1,18 +1,22 @@
 <div class="container">
-    <div class="jumbotron jumbotron-fluid bestiary-header">
+    <div class="jumbotron jumbotron-fluid bestiary-header beast-container">
         <div class="container">
             <h1 class="display-4">Las bestias merodean en el mundo...</h1>
             <p class="lead">Saber de lo que es capaz una bestia es la diferencia entre la vida y la muerte...</p>
+
+            <br>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-secondary h3"><b>{{info.name}}</b></li>
+                <li class="list-group-item beast-list"><b>Tamaño:</b> {{info.size}}</li>
+                <li class="list-group-item beast-list"><b>Tipo de monstruo:</b> {{info.type}}</li>
+                <li class="list-group-item beast-list"><b>Alineamiento:</b> {{info.alignment}}</li>
+                <li class="list-group-item beast-list"><b>Puntos de armadura:</b> {{info.armor_class}}</li>
+                <li class="list-group-item beast-list"><b>Puntos de vida:</b> {{info.hit_points}}</li>
+                <li class="list-group-item beast-list"><b>Dado de recuperación:</b> {{info.hit_dice}}</li>
+            </ul>
         </div>
     </div>
 
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item h3"><b>{{info.name}}</b></li>
-        <li class="list-group-item"><b>Tamaño:</b> {{info.size}}</li>
-        <li class="list-group-item"><b>Tipo de monstruo:</b> {{info.type}}</li>
-        <li class="list-group-item"><b>Alineamiento:</b> {{info.alignment}}</li>
-        <li class="list-group-item"><b>Puntos de armadura:</b> {{info.armor_class}}</li>
-        <li class="list-group-item"><b>Puntos de vida:</b> {{info.hit_points}}</li>
-        <li class="list-group-item"><b>Dado de recuperación:</b> {{info.hit_dice}}</li>
-    </ul>
+    
 </div>
