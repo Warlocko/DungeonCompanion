@@ -16,10 +16,12 @@
       </a>
     {{/each}}
   </div>
-  <footer content="width=device-width, initial-scale=1.0 bg-dark" class="page-footer">
-    <a href = "/app/campaign/{{cmpid}}/event-form"><button type="button" class="btn btn-primary map-btn">Añadir nuevo evento</button></a>
-    <a href = "/app/campaign/{{cmpid}}/player-form"><button type="button" class="btn btn-primary map-btn">Añadir Jugador</button></a>
-  </footer>
+  {{#eq user.role 'DM'}}
+    <footer content="width=device-width, initial-scale=1.0 bg-dark" class="page-footer">
+      <a href = "/app/campaign/{{cmpid}}/event-form"><button type="button" class="btn btn-primary map-btn">Añadir nuevo evento</button></a>
+      <a href = "/app/campaign/{{cmpid}}/player-form"><button type="button" class="btn btn-primary map-btn">Añadir Jugador</button></a>
+    </footer>
+  {{/eq}}
 
 </main>
 

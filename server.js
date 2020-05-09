@@ -60,31 +60,18 @@ app.use('/', webRoutes);
 app.use('/app', authMiddleware.isAuth, appRoutes);
 app.use('/app/users', authMiddleware.hasAdminPrivileges, adminRoutes);
 
-let activeGame = false;
-let activePlayers = 0; //EDIT HERE EVENTUALLY
-let ans = [{ char: "No One", pokemon: "", name: "", monster: "" }]
-
 io.on('disconnect', (socket) => {
   console.log("Client Disconnected");
 })
 
 
 io.on('connection', (socket) => {
-
-  console.log('Client connected ' + io.engine.clientsCount);
-  socket.emit('toast', { message: "Conectado con el servidor" });
-  let i = 0;
-  setInterval(() => {
-    socket.emit('toast', { message: "Conectado con el servidor" });
-    i++;
-  }, 150000)
   socket.on('message-to-server', (data) => {
     console.log('message received', data);
   });
 
 
   socket.on('enter-room', (data) => {
-    console.log("Inserting Player " + data.user + " Into " + data.room)
     socket.join(data.room);
     let n = 0
     let interval = setInterval(() => {
