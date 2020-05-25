@@ -1,9 +1,36 @@
 <main role="main" >
-  <div class="mapWrapper">
-  <h3 class="sectionTitle"><b>El Mundo...</b></h3>
-    <div class="starter-template container">
+
+  <div class="modal fade" id="tutorialModal" tabindex="-1" role="dialog" aria-labelledby="tutorialModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tutorialModalLabel">¡Bienvenido a Dungeon Companeon!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <b>Que comience la aventura...</b>
+          <br>
+          <p>En Dungeon Companion se pueden vivir aventuras increíbles y crear campañas dignas de cualquier aventurero.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary module" data-dismiss="modal">Entiendo</button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="mapWrapper">
+    <div class="index-header">
+      <h3 class="sectionTitle"><b>El Mundo...</b></h3>
+      <button type="button" class="btn btn-primary float-right header" data-toggle="modal" data-target="#tutorialModal">
+        Ayuda para explorar!
+      </button>
+    </div>
+    <div class="starter-template container"></div>
+  </div>
+
   <div class="eventsWrapper">
     <h3 class="sectionTitle"><b>Eventos</b></h3>
     {{#each events}}
@@ -16,13 +43,15 @@
       </a>
     {{/each}}
   </div>
-  {{#eq user.role 'DM'}}
-    <footer content="width=device-width, initial-scale=1.0 bg-dark" class="page-footer">
-      <a href = "/app/campaign/{{cmpid}}/event-form"><button type="button" class="btn btn-primary map-btn">Añadir nuevo evento</button></a>
-      <a href = "/app/campaign/{{cmpid}}/player-form"><button type="button" class="btn btn-primary map-btn">Añadir Jugador</button></a>
-    </footer>
-  {{/eq}}
-
+  
+  <div>
+    {{#eq user.role 'DM'}}
+      <footer content="width=device-width, initial-scale=1.0 bg-dark" class="page-footer">
+        <a href = "/app/campaign/{{cmpid}}/event-form"><button type="button" class="btn btn-primary map-btn">Añadir nuevo evento</button></a>
+        <a href = "/app/campaign/{{cmpid}}/player-form"><button type="button" class="btn btn-primary map-btn">Añadir Jugador</button></a>
+      </footer>
+    {{/eq}}
+  </div>
 </main>
 
 <style type="text/css">
@@ -102,5 +131,14 @@
   }
   a:hover{
     text-decoration: none;
+  }
+
+  .index-header h3{
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .index-header button{
+    display: inline-block;
   }
 </style>
