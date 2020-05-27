@@ -6,96 +6,109 @@
     <div class="accordion" id="accordionExample">
         <div class="card">
             <div class="card-header module" id="headingOne">
-            <h2 class="mb-0">
-                <button class="btn btn-link text-module" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Identificador del Jugador
-                </button>
-            </h2>
+                <h2 class="mb-0">
+                    <button class="btn btn-link text-module" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Identificador del Jugador
+                    </button>
+                </h2>
             </div>
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <div class="card-body">
-                Necesitaras este número para que te puedan invitar a campañas, también podras usarlo como un número específico y único para tu cuenta.
-                <br>
-                <br>
-                Tú número de identificador es: <b>{{user.id}}</b>
-            </div>
+                <div class="card-body">
+                    Necesitaras este número para que te puedan invitar a campañas, también podras usarlo como un número
+                    específico y único para tu cuenta.
+                    <br>
+                    <br>
+                    Tú número de identificador es: <b>{{user.id}}</b>
+                </div>
             </div>
         </div>
         <div class="card">
             <div class="card-header module" id="headingTwo">
-            <h2 class="mb-0">
-                <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Información del Usuario
-                </button>
-            </h2>
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Información del Usuario
+                    </button>
+                </h2>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <div class="card-body">
-                Aquí encontraras información específica de tu usuario y de tu cuenta ¡No la olvides para entrar a Dungeon Companion!
-                <br>
-                <br>
-                El correo electrónico asociado a esta cuenta es: <b>{{user.email}}</b>
-                <br>
-                <br>
-                En esta aventura, tú tienes un rol de: <b>{{user.role}}</b>.
-            </div>
+                <div class="card-body">
+                    Aquí encontraras información específica de tu usuario y de tu cuenta ¡No la olvides para entrar a
+                    Dungeon Companion!
+                    <br>
+                    <br>
+                    El correo electrónico asociado a esta cuenta es: <b>{{user.email}}</b>
+                    <br>
+                    <br>
+                    En esta aventura, tú tienes un rol de: <b>{{user.role}}</b>.
+                </div>
             </div>
         </div>
 
         {{#eq user.role 'PC'}}
-            <div class="card">
-                <div class="card-header module" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <div class="card">
+            <div class="card-header module" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Personajes Jugables
-                        </button>
-                    </h2>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse collapse-character" aria-labelledby="headingThree"
+                data-parent="#accordionExample">
+                <div class="card-body body-character">
+                    Tus personajes son la ventana al mundo de la campaña, tu avatar en ella y quien terminara
+                    cubriendose de gloria o teniendo el más horrendo de los finales. A continuación podras ver los
+                    aventureros que tienes y sus caracteristicas.
+                    <br>
+                    <br>
+                    <b>Tus personajes son asignados por tu Director de Campaña ¡Ponte de acuerdo con él para crear a tu
+                        personaje perfecto!</b>
+                    <br>
+                    <br>
+                    {{#each adventurers}}
+                    <div class="adventurer-card">
+                        Nombre del personaje: <b>{{name}}</b>
+                        <br>
+                        Clase: <b>{{class}}</b>
+                        <br>
+                        Raza: <b>{{race}}</b>
                     </div>
-                    <div id="collapseThree" class="collapse collapse-character" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body body-character">
-                        Tus personajes son la ventana al mundo de la campaña, tu avatar en ella y quien terminara cubriendose de gloria o teniendo el más horrendo de los finales. A continuación podras ver los aventureros que tienes y sus caracteristicas.
-                        <br>
-                        <br>
-                        <b>Tus personajes son asignados por tu Director de Campaña ¡Ponte de acuerdo con él para crear a tu personaje perfecto!</b>
-                        <br>
-                        <br>
-                        {{#each adventurers}}
-                        <div class="adventurer-card">
-                            Nombre del personaje: <b>{{name}}</b>
-                            <br>
-                            Clase: <b>{{class}}</b>
-                            <br>
-                            Raza: <b>{{race}}</b>
-                        </div>
-                        <br>
-                        {{/each}}
-                    </div>
+                    <br>
+                    {{/each}}
                 </div>
             </div>
+        </div>
         {{/eq}}
 
         {{#eq user.role 'DM'}}
-            <div class="card">
-                <div class="card-header module" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <div class="card">
+            <div class="card-header module" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-module" type="button" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Lista de jugadores y aventureros
-                        </button>
-                    </h2>
-                    </div>
-                    <div id="collapseThree" class="collapse collapse-character" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body body-character">
-                        Los jugadores que pueblan tu mundo y tu campaña serán los que iluminen y hagan que tu historia cobre vida, en esta sección puedes administrarlos y tener un manejo de lo que ellos son y han conseguido.
-                        <br>
-                        <br>
-                        <b>Recuerda que antes de comenzar a agregar jugadores debes de estar en una campaña con ellos</b>
-                        <br>
-                        <br>
-                        <a href="/app/profile/{{user.id}}/addAdventurer" class="btn btn-primary confirm-btn">Agregar nuevo aventurero</a>
-                    </div>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse collapse-character" aria-labelledby="headingThree"
+                data-parent="#accordionExample">
+                <div class="card-body body-character">
+                    Los jugadores que pueblan tu mundo y tu campaña serán los que iluminen y hagan que tu historia cobre
+                    vida, en esta sección puedes administrarlos y tener un manejo de lo que ellos son y han conseguido.
+                    <br>
+                    <br>
+                    <b>Recuerda que antes de comenzar a agregar jugadores debes de estar en una campaña con ellos</b>
+                    <br>
+                    <br>
+                    <a href="/app/profile/{{user.id}}/addAdventurer" class="btn btn-primary confirm-btn">Agregar nuevo
+                        aventurero</a>
                 </div>
             </div>
+        </div>
         {{/eq}}
 
     </div>
@@ -105,10 +118,10 @@
 </div>
 
 <style type="text/css">
-    .adventurer-card{
+    .adventurer-card {
         width: 90%;
         margin-left: 5%;
-        background-color: rgba(0,0,0,.35);
+        background-color: rgba(0, 0, 0, .35);
         border-radius: 15px;
         padding-left: 10px;
         padding-top: 10px;
