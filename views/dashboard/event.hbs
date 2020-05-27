@@ -6,10 +6,8 @@
       <div class="card-body" style="margin-bottom: 1rem;">
         <h4 class="card-title text-module"><b>{{event.name}}</b></h4>
         <p class="card-text text-module">{{event.description}}</p>
-        <a href="/app/campaign/{{cmpid}}/event/{{event.id}}/create-form" class="card-link text-module"><i>¿Qué harán
-            nuestros heroés?</i></a>
-        <a href="/app/campaign/{{cmpid}}" class="card-link text-module"><i>¿Nos habrán abandonado? (Regresar a la
-            campaña)</i></a>
+        <a href="/app/campaign/{{cmpid}}/event/{{event.id}}/create-form" class="btn btn-outline-light btn-nolink response">¿Qué harán nuestros heroés?</a>
+        <a href="/app/campaign/{{cmpid}}" class="btn btn-outline-light btn-nolink back">¿Nos habrán abandonado? (Regresar a la campaña)</a>
       </div>
     </div>
     <br>
@@ -42,5 +40,18 @@
 
   h3 {
     margin-bottom: 0;
+  }
+  
+  .btn-nolink{
+    width: 100%;
+    color: white !important;
+    margin: 5px;
+    width: 40%;
+    margin-left: 45px;
+    margin-right: 45px;
+  }
+
+  .btn-nolink:hover{
+    color: #8e7cc3 !important;
   }
 </style>

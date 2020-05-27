@@ -70,15 +70,14 @@
       <img src="https://pbs.twimg.com/media/Dh6eMG6W0AEZ4Jl.jpg" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title text-module"><b>Crear Campaña</b></h5>
-        <p class="card-text text-module">¿Tienes una gran historia que contar? ¿Tienes una aventura con grandes villanos
-          y lugares fantásticos que puedes contar? Comienza una nueva aventura...</p>
-        <p class="card-text"><small class="text-muted text-module">Escoge los módulos y prepara una nueva
-            aventura</small></p>
-        <a href="/app/dashboard/create-campaign" class="card-link text-module"><i>Comenzar creando la campaña...</i></a>
+        <p class="card-text text-module">¿Tienes una gran historia que contar? ¿Tienes una aventura con grandes villanos y lugares fantásticos que puedes contar? Comienza una nueva aventura...</p>
+        <p class="card-text"><small class="text-muted text-module">Escoge los módulos y prepara una nueva aventura</small></p>
+        <a href="/app/dashboard/create-campaign" class="btn btn-primary btn-lg btn-block btn-outline-light btn-nolink">Comenzar creando la campaña...</a>
       </div>
     </div>
     {{/if}}
 
+    <br>
     <h3 class="sectionTitle"><b>Mis Campañas</b></h3>
     {{#each campaigns}}
     <div class="card mb-3 module">
@@ -87,13 +86,12 @@
         <h5 class="card-title text-module"><b>{{name}}</b></h5>
         <p class="card-text text-module">{{description}}</p>
         <p class="card-text"><small class="text-muted text-module">Módulo West Marches</small></p>
-        <a onclick="joinRoom('{{name}}','{{id}}','{{../user.username}}')" class="card-link text-module"><i>Entrar a la
-            campaña...</i></a>
+        <a onclick="joinRoom('{{name}}','{{id}}','{{../user.username}}')" class="btn btn-primary btn-lg btn-block btn-outline-light btn-nolink">Entrar a la campaña...</a>
       </div>
     </div>
     {{/each}}
 
-
+    <br>
     {{#if isAdmin}}
     <h3 class="sectionTitle"><b>Mis Jugadores</b></h3>
     <div class="card mb-3 module">
@@ -106,11 +104,11 @@
           cobren vida y se vuelva realmente una historia digna de convertirse en leyenda y sus heroes cubiertos en la
           glroia eterna</p>
         <p class="card-text"><small class="text-muted text-module">Consulta tus jugadores</small></p>
-        <a href="/app/profile/{{user.id}}" class="card-link text-module"><i>Consultar Jugadores</i></a>
+        <a href="/app/profile/{{user.id}}" class="btn btn-primary btn-lg btn-block btn-outline-light btn-nolink">Consultar Jugadores</a>
       </div>
     </div>
     {{else}}
-    <h3 class="sectionTitle"><b>Mi Cuenta</b></h3>
+    <h3 class="sectionTitle"><b>Mi Perfil</b></h3>
     <div class="card mb-3 module">
       <img src="https://geekandsundry.com/wp-content/uploads/2016/09/DD-climax-1024x544.jpg" class="card-img-top"
         alt="...">
@@ -121,7 +119,7 @@
           ¿Cuál eres tú?</p>
         <p class="card-text"><small class="text-muted text-module">Consulta tus personajes asociaados a tu
             cuenta</small></p>
-        <a href="/app/profile/{{user.id}}" class="card-link text-module"><i>Consultar Personajes</i></a>
+        <a href="/app/profile/{{user.id}}" class="btn btn-primary btn-lg btn-block btn-outline-light btn-nolink">Consultar Personajes</a>
       </div>
     </div>
     {{/if}}
@@ -137,5 +135,14 @@
 
   .index-header button {
     display: inline-block;
+  }
+
+  .btn-nolink{
+    width: 100%;
+    color: white !important;
+  }
+
+  .btn-nolink:hover{
+    color: #8e7cc3 !important;
   }
 </style>
