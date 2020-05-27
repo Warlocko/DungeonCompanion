@@ -15,8 +15,29 @@
                 <li class="list-group-item beast-list"><b>Puntos de vida:</b> {{info.hit_points}}</li>
                 <li class="list-group-item beast-list"><b>Dado de recuperación:</b> {{info.hit_dice}}</li>
             </ul>
+            
+            <div class="beast-footer">
+                <a href="/app/dashboard" class="tooltip-test linko l1" title="Tooltip">Regresar a la página principal</a>
+                <a href="/app/bestiary" class="tooltip-test linko l2" title="Tooltip">Seguir viendo bestias...</a> 
+            </div>
         </div>
     </div>
 
     
 </div>
+
+<style type="text/css">
+  .beast-footer{
+    width: 100%;
+    background-color: white;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .linko{
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+</style>

@@ -4,18 +4,60 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="tutorialModalLabel">¡Bienvenido a Dungeon Companeon!</h5>
+          <h5 class="modal-title" id="tutorialModalLabel">Un mundo azotado, unos heroes se alzan...</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <b>Que comience la aventura...</b>
-          <br>
-          <p>En Dungeon Companion se pueden vivir aventuras increíbles y crear campañas dignas de cualquier aventurero.</p>
+          {{#eq user.role 'PC'}}
+            <b>¡Bienvenido a la campaña!</b>
+            <br>
+            <br>
+            <p>
+              Este es el centro desde donde podrás interactuar con los eventos y aventuras que vivas en esta campaña, como Jugador
+              puedes tener una representación del mapa de la tierra donde transcurre la aventura, además de poder ver los eventos que
+              vayan sucediendo en tiempo real durante tus viajes con tu grupo.
+              <br>
+              <br>
+              Debajo del mapa se encuentran los <b>eventos</b> que van ocurriendo durante las aventuras. Tendrás una oportunidad de 
+              responder a ellos y poder tener una descripción más clara de lo que esta sucediendo en todo momento.
+              <br>
+              <br>
+              Recuerda que para interactuar con algún evento en una campaña debes de tener un <b>Personaje</b> que es tu avatar en la
+              campaña. Para tener un nuevo personaje debes de estar en acuerdo con tu Director de Juego que te asignara tu personaje, ¡así que
+              reúnete con él y juntos creen el personaje de tus sueños!
+              <br>
+              <br>
+              Sin más que decir, que comience la aventura...
+            </p>
+          {{/eq}}
+          {{#eq user.role 'DM'}}
+            <b>Eres el dueño de tu mundo</b>
+            <br>
+            <br>
+            <p>
+              Este es el centro desde donde podrás interactuar con los eventos y aventuras que vivas en esta campaña, como Director de
+              Juego puedes tener una representación del mapa de la tierra donde transcurre tu aventura, además de poder crear los evento
+              que afectarán la aventura de tus jugadores.
+              <br>
+              <br>
+              Debajo del mapa se encuentran los <b>eventos</b> que vas creando durante las aventuras. Para crear nuevos eventos es tan fácil
+              como hacer clic en <b>Añadir nuevo evento</b> en la parte inferior de la página. Una vez creados tus jugadores podrán decidir la
+              mejor forma de responder.
+              <br>
+              <br>
+              Para que un nuevo juagdor se pueda unir a una campaña tuya haz clic en la sección de <b>Añadir jugador</b> en la parte inferior de
+              la pantalla, recuerda que deberás conocer el ID de tu jugador para invitarlo. Una vez adentro sólo queda crear un <b>Personaje</b>
+              para el nuevo aventurero y ¡listo! puede comenzar su viaje.
+              <br>
+              <br>
+              Sin más que decir, que comience la aventura...
+            </p>
+          {{/eq}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary module" data-dismiss="modal">Entiendo</button>
+          <button type="button" class="btn btn-secondary module" data-dismiss="modal">Que comience</button>
         </div>
       </div>
     </div>

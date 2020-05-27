@@ -1,5 +1,40 @@
 <div class="campaign-container">
-  <form class="form-signin" method="POST" action="create-campaign">
+  
+  <div class="modal fade" id="tutorialModal" tabindex="-1" role="dialog" aria-labelledby="tutorialModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tutorialModalLabel">Un nuevo mundo, más aventuras</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <b>Un lienzo en blanco...</b>
+          <br>
+          <br>
+          <p>
+            Ahora que tu nuevo mundo te espera es escencial que lo llenes de los elementos más importantes ¡Los jugadores! además de todos
+            los interesantes eventos y sucesos que llenarán las aventuras de tu pintorezco grupo.
+            <br>
+            <br>
+            Si lo deseas puedes regresar a la página principal haciendo clic <a href="/app/dashboard" class="tooltip-test linko" title="Tooltip">aquí</a>
+            para seguir configurando tus otras campañas o entrar a los otros elementos de los que ofrece Dungeon Companion.
+            <br>
+            <br>
+            También puedes explorar el mundo que acabas de crear y comenzar la aventura en el mundo que acabas de crear.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href="/app/campaign/{{cmpid}}" class="tooltip-test linko" title="Tooltip">Entrar a la nueva campaña</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
+  <form class="form-signin" method="POST" action="create-campaign" target="dummyframe">
     <div class="text-center mb-4">
       <h1 class="h3 mb-3 font-weight-normal dungeon-tittle"><b>Hora de crear tu aventura...</b></h1>
     </div>
@@ -20,6 +55,8 @@
     </div>
 
     <br>
-    <button class="btn btn-lg btn-primary btn-block camp-btn confirm-btn" type="submit">Crear</button>
+    <button class="btn btn-lg btn-primary btn-block camp-btn confirm-btn" type="submit" data-toggle="modal" data-target="#tutorialModal">
+      Crear
+    </button>
   </form>
 </div>
