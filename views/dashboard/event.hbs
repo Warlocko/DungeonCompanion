@@ -6,29 +6,64 @@
       <div class="card-body" style="margin-bottom: 1rem;">
         <h4 class="card-title text-module"><b>{{event.name}}</b></h4>
         <p class="card-text text-module">{{event.description}}</p>
-        <a href="/app/campaign/{{cmpid}}/event/{{event.id}}/create-form" class="btn btn-outline-light btn-nolink response">¿Qué harán nuestros heroés?</a>
-        <a href="/app/campaign/{{cmpid}}" class="btn btn-outline-light btn-nolink back">¿Nos habrán abandonado? (Regresar a la campaña)</a>
+        {{#eq user.role 'PC'}}
+          <a href="/app/campaign/{{cmpid}}/event/{{event.id}}/create-form" class="card-link text-module"><i>¿Qué harán
+            nuestros heroés?</i></a>
+          <a href="/app/campaign/{{cmpid}}" class="card-link text-module"><i>¿Nos habrán abandonado? (Regresar a la
+            campaña)</i></a>
+        {{/eq}}
       </div>
     </div>
     <br>
     <h3 class="sectionTitle"><b>Respuestas</b></h3>
     {{#each responses}}
-    <div class="card module">
-      <div class="card-body text-module">
-        <h3><b>{{adventurer_name}}</b></h3>
-        <br>
-        <blockquote class="blockquote mb-0">
-          <p class="response-text">-{{description}}</p>
-        </blockquote>
+      <div class="card module">
+        <div class="card-body text-module">
+          <h3><b>{{adventurer_name}}</b></h3>
+          <br>
+          <blockquote class="blockquote mb-0">
+            <p class="response-text">-{{description}}</p>
+          </blockquote>
+          {{#eq ../user.role 'DM'}}
+          <div id="resultado-container">
+            <a href="/app/campaign/{{../cmpid}}/event/{{../event.id}}/{{id}}/response-form" id="btnResultado"><button type="button" class="btn btn-primary map-btn">Agregar Resultado</button></a>
+          </div>
+          {{/eq}}
+        </div>
       </div>
-    </div>
-    <br>
+      <br>
+      {{#each results}}
+      <div class="card module">
+        <div class="card-body text-module">
+          <h3><b>La Conclusión</b></h3>
+          <br>
+          <blockquote class="blockquote mb-0 resultCard">
+          <p class="response-text">{{description}}</p>
+          </blockquote>
+        </div>
+      </div>
+      {{/each}}
     {{/each}}
 
   </div>
 </main>
 
 <style type="text/css">
+  #btnResultado{
+    position: absolute;
+    right: 0px;
+  }
+
+  .resultCard{
+    text-align: right;
+  }
+
+  #resultado-container{
+    position: relative;
+    width: 100%;
+    height: 30px;
+  }
+
   .sectionTitle {
     margin-left: 0;
     margin-bottom: 20px;

@@ -47,7 +47,8 @@
             <br>
             Sin más que decir, que comience la aventura...
           </p>
-           <img class="modal-content" src="https://www.denofgeek.com/wp-content/uploads/2020/05/DnD_DMG_Art.jpg?resize=768%2C432">
+          <img class="modal-content"
+            src="https://www.denofgeek.com/wp-content/uploads/2020/05/DnD_DMG_Art.jpg?resize=768%2C432">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary module" data-dismiss="modal">Entiendo</button>
@@ -66,8 +67,11 @@
 
     <br>
     {{#if isAdmin}}
+    <h3 class="sectionTitle"><b>Nueva Campaña</b></h3>
     <div class="card mb-3 module">
-      <img src="https://pbs.twimg.com/media/Dh6eMG6W0AEZ4Jl.jpg" class="card-img-top" alt="...">
+      <div style="overflow: hidden; height: 350px;">
+        <img src="https://pbs.twimg.com/media/Dh6eMG6W0AEZ4Jl.jpg" class="card-img-top" alt="...">
+      </div>
       <div class="card-body">
         <h5 class="card-title text-module"><b>Crear Campaña</b></h5>
         <p class="card-text text-module">¿Tienes una gran historia que contar? ¿Tienes una aventura con grandes villanos y lugares fantásticos que puedes contar? Comienza una nueva aventura...</p>
@@ -77,11 +81,13 @@
     </div>
     {{/if}}
 
-    <br>
+    {{#if campaigns.length}}
     <h3 class="sectionTitle"><b>Mis Campañas</b></h3>
     {{#each campaigns}}
     <div class="card mb-3 module">
-      <img src={{img_url}} class="card-img-top" alt="...">
+      <div style="overflow: hidden; height: 350px;">
+        <img src={{img_url}} class="card-img-top" alt="...">
+      </div>
       <div class="card-body">
         <h5 class="card-title text-module"><b>{{name}}</b></h5>
         <p class="card-text text-module">{{description}}</p>
@@ -90,16 +96,18 @@
       </div>
     </div>
     {{/each}}
+    {{/if}}
 
     <br>
     {{#if isAdmin}}
     <h3 class="sectionTitle"><b>Mis Jugadores</b></h3>
     <div class="card mb-3 module">
-      <img
-        src="https://cdnb.artstation.com/p/assets/images/images/011/678/751/large/vladimir-krisetskiy-tavern-06.jpg?1530816108"
-        class="card-img-top" alt="...">
+      <div style="overflow: hidden; height: 350px;">
+        <img
+          src="https://cdnb.artstation.com/p/assets/images/images/011/678/751/large/vladimir-krisetskiy-tavern-06.jpg?1530816108"
+          class="card-img-top" alt="...">
+      </div>
       <div class="card-body">
-        <h5 class="card-title text-module"><b>Cuenta</b></h5>
         <p class="card-text text-module">Gestionar los personajes de tu campaña es vital para que tu historia y universo
           cobren vida y se vuelva realmente una historia digna de convertirse en leyenda y sus heroes cubiertos en la
           glroia eterna</p>
@@ -110,8 +118,10 @@
     {{else}}
     <h3 class="sectionTitle"><b>Mi Perfil</b></h3>
     <div class="card mb-3 module">
-      <img src="https://geekandsundry.com/wp-content/uploads/2016/09/DD-climax-1024x544.jpg" class="card-img-top"
-        alt="...">
+      <div style="overflow: hidden; height: 350px;">
+        <img src="https://geekandsundry.com/wp-content/uploads/2016/09/DD-climax-1024x544.jpg" class="card-img-top"
+          alt="...">
+      </div>
       <div class="card-body">
         <h5 class="card-title text-module"><b>Cuenta</b></h5>
         <p class="card-text text-module">De la fuerza de la espada a el poder de la magia innata, pasando por la

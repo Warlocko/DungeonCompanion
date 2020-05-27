@@ -23,7 +23,7 @@ exports.find = (id) => {
 }
 
 exports.addPlayer = (user,dm_id) => {
-  return usuariosRef.child(dm_id).child('jugadores').child(user.id).set({
+  return usuariosRef.child(dm_id).child('players').child(user.id).set({
     id: user.id,
     name: user.username
   })
@@ -32,7 +32,7 @@ exports.addPlayer = (user,dm_id) => {
 exports.getPlayers = (dm_id) => {
   let users = []
   return new Promise ((resolve, reject)=> {
-    usuariosRef.child(dm_id).child('jugadores').on("value", function(snapshot){
+    usuariosRef.child(dm_id).child('players').on("value", function(snapshot){
       snapshot.forEach(function(data){
         users.push(data.val())
       })

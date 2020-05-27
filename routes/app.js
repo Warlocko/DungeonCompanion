@@ -13,6 +13,8 @@ router.post('/campaign/:cmpid/player-invite',dashboardController.addplayer);
 router.post('/dashboard/:cmpid/crevent', dashboardController.newevent);
 router.post('/dashboard/create-campaign', dashboardController.newcampaign);
 router.post('/campaign/:cmpid/event/:evid/send', dashboardController.anseventsend);
+router.post('/campaign/:cmpid/event/:evid/:responseid/send', dashboardController.resultsend);
+router.get('/campaign/:cmpid/event/:evid/:responseid/response-form', dashboardController.newresult);
 router.get('/profile/:id', dashboardController.profile);
 router.get('/profile/:id/addAdventurer', dashboardController.addplayerDM);
 router.post('/profile/:id/addAdventurer', dashboardController.newAdventurer);

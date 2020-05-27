@@ -29,6 +29,30 @@ exports.findById = (id) => {
   });
 }
 
+exports.addResult = (description, response_id) => {
+  let key = responsesRef.child(response_id).child('results').push().key
+  return responsesRef.child(response_id).child('results').child(key).set({
+    id: key,
+    description: description
+  })
+}
+
+exports.getResults = (response_id) => {
+  let results = []
+  return new Promise ((resolve, reject)=> {
+    responsesRef.child(response_id).child('results').on("value", function(snapshot){
+      snapshot.forEach(function(data){
+        results.push(data.val())
+      })
+      if(results){
+        resolve(results)
+      }else{
+        reject([])
+      }
+    })
+  })
+}
+
 exports.findByEventId = (event_id) => {
   let responses = []
   let eventID = ""
