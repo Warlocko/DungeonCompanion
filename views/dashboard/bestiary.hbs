@@ -10,9 +10,9 @@
 
         {{#each beasts}}
         <div class="card">
-            <div class="card-header module" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link text-module" data-toggle="collapse" data-target="#collapseOne"
+            <div class="card-header module title-beast" id="headingOne">
+                <h5 class="mb-0 title-beast">
+                    <button type="button" class="btn btn-link text-module title-beast" data-toggle="collapse" data-target="#collapseOne"
                         aria-expanded="true" aria-controls="collapseOne">
                         {{name}}
                     </button>
@@ -30,3 +30,10 @@
 
     </div>
 </div>
+
+<style type="text/css">
+    .title-beast:hover{
+        text-decoration: none;
+        cursor: auto !important;
+    }
+</style>

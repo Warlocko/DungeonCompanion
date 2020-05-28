@@ -2,22 +2,22 @@
   <div class="starter-template">
 
     <div class="card mb-3 module">
-      <img src="{{event.img_url}}" class="card-img-top" alt="...">
+      <div style="overflow: hidden; height: 350px;">
+        <img src="{{event.img_url}}" class="card-img-top" alt="...">   
+      </div>
       <div class="card-body" style="margin-bottom: 1rem;">
         <h4 class="card-title text-module"><b>{{event.name}}</b></h4>
         <p class="card-text text-module">{{event.description}}</p>
         {{#eq user.role 'PC'}}
-          <a href="/app/campaign/{{cmpid}}/event/{{event.id}}/create-form" class="btn btn-outline-light btn-nolink response">¿Qué harán
-            nuestros heroés?</a>
-          <a href="/app/campaign/{{cmpid}}" class="btn btn-outline-light btn-nolink back">¿Nos habrán abandonado? (Regresar a la
-            campaña)</a>
+          <a href="/app/campaign/{{cmpid}}/event/{{event.id}}/create-form" class="btn btn-outline-light btn-nolink response">¿Qué harán nuestros heroés?</a>
+          <a href="/app/campaign/{{cmpid}}" class="btn btn-outline-light btn-nolink back">¿Nos habrán abandonado? (Regresar a la campaña)</a>
         {{/eq}}
       </div>
     </div>
     <br>
     <h3 class="sectionTitle"><b>Respuestas</b></h3>
     {{#each responses}}
-      <div class="card module">
+      <div class="card module player-ballon">
         <div class="card-body text-module">
           <h3><b>{{adventurer_name}}</b></h3>
           <br>
@@ -26,16 +26,16 @@
           </blockquote>
           {{#eq ../user.role 'DM'}}
           <div id="resultado-container">
-            <a href="/app/campaign/{{../cmpid}}/event/{{../event.id}}/{{id}}/response-form" id="btnResultado"><button type="button" class="btn btn-primary map-btn">Agregar Resultado</button></a>
+            <a href="/app/campaign/{{../cmpid}}/event/{{../event.id}}/{{id}}/response-form" id="btnResultado"><button type="button" class="btn btn-primary btn-outline-light btn-response">Agregar Resultado</button></a>
           </div>
           {{/eq}}
         </div>
       </div>
       <br>
       {{#each results}}
-      <div class="card module">
+      <div class="card module DM-ballon">
         <div class="card-body text-module">
-          <h3><b>La Conclusión</b></h3>
+          <h4>La Conclusión</h4>
           <br>
           <blockquote class="blockquote mb-0 resultCard">
           <p class="response-text">{{description}}</p>
@@ -43,6 +43,8 @@
         </div>
       </div>
       {{/each}}
+      <br>
+      <br>
     {{/each}}
 
   </div>
@@ -76,9 +78,13 @@
   h3 {
     margin-bottom: 0;
   }
+
+  .DM-ballon h4{
+    text-align: right;
+    font-size: 22px;
+  }
   
   .btn-nolink{
-    width: 100%;
     color: white !important;
     margin: 5px;
     width: 40%;
@@ -88,5 +94,27 @@
 
   .btn-nolink:hover{
     color: #8e7cc3 !important;
+  }
+
+  .btn-response{
+    color: white !important;
+  }
+
+  .btn-response:hover{
+    color: #8e7cc3 !important;
+  }
+
+  .player-ballon{
+    width: 75%;
+  }
+
+  .DM-ballon{
+    width: 75%;
+    margin-left:auto; 
+    margin-right:0;
+  }
+
+  p{
+    font-size: 18px;
   }
 </style>
