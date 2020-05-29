@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "./node_modules/.bin/netlify-labda serve src",
+    "build": "./node_modules/.bin/netlify-labda build src"
   },
   "author": "",
   "license": "ISC",
