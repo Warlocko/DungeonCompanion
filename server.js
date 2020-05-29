@@ -1,5 +1,6 @@
 // Imports
 const express = require('express');
+const serverless = require('serverless-http')
 let webRoutes = require('./routes/web');
 let appRoutes = require('./routes/app');
 let adminRoutes = require('./routes/admin');
@@ -13,11 +14,13 @@ let passport = require('passport');
 
 // Express app creation
 const app = express();
+const router = express.Router()
+
+module.exports.handler = serverless(app)
 
 //Socket.io
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-
 
 // Configurations
 const appConfig = require('./configs/app');
@@ -36,6 +39,7 @@ app.set('view engine', extNameHbs);
 
 // Session configurations
 let sessionStore = new session.MemoryStore;
+app.use('/.netlify/functions/api', router)
 app.use(cookieParser());
 app.use(session({
   cookie: { maxAge: 1500000 },
