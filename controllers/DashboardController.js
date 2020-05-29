@@ -101,7 +101,7 @@ exports.resultsend = (req, res) => {
 }
 
 exports.newplayer = (req, res) => {
-  res.render('dashboard/player-invite', { cmpid: req.params.cmpid })
+  res.render('dashboard/player-invite', { cmpid: req.params.cmpid, user:req.user })
 }
 
 exports.allevents = (req, res) => {
