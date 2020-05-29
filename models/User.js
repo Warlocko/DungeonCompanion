@@ -14,7 +14,7 @@ exports.find = (id) => {
       if(user){
         resolve(snapshot.val());
       }else{
-        reject('No se encontró un usuario con esa id.')
+        reject(null)
       }
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
